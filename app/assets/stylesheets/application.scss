@@ -1,0 +1,455 @@
+@import "foundation_and_overrides";
+@import "font-awesome";
+@import "home";
+@import "about";
+@import "jquery.datetimepicker.css";
+@import "jquery.kladr.min";
+@import "loyalty";
+@import "orders";
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body {
+    font-family: Montserrat;
+    margin-left: 10px;
+    margin-right: 10px;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+    background-repeat: no-repeat;
+    background-color: rgb(21, 48, 68);
+}
+h1 > a {
+  color: #eee;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
+h1 > a:visited {
+    color: #eee;
+   }
+h1 > a:hover {
+    color: #eee;
+}
+
+.notice {
+  display: none;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.two-column-text {
+  column-count: 2;
+  column-gap: 1rem;
+  color: white;
+  font-size: 0.8rem;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: .8;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: .8;}
+}
+
+.floated-label-wrapper {
+  position: relative;
+}
+
+.floated-label-wrapper label {
+  background: #fefefe;
+  color: #1779ba;
+  font-size: 0.7rem;
+  left: 0.75rem;
+  opacity: 0;
+  padding: 0 0.25rem;
+  position: absolute;
+  top: 2rem;
+  transition: all 0.15s ease-in;
+  z-index: -1;
+}
+
+.floated-label-wrapper label input[type=text],
+.floated-label-wrapper label input[type=email],
+.floated-label-wrapper label input[type=password] {
+  border-radius: 4px;
+  font-size: 1.75em;
+  padding: 0.5em;
+}
+
+.floated-label-wrapper label.show {
+  opacity: 1;
+  top: -0.85rem;
+  z-index: 1;
+  transition: all 0.15s ease-in;
+}
+
+
+.blur {
+  -webkit-filter: blur(5px);
+     -moz-filter: blur(5px);
+       -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+          filter: blur(5px);
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.slideLeft {
+    animation-name: slideLeft;
+    -webkit-animation-name: slideLeft;
+    animation-duration: 0.7s;
+    -webkit-animation-duration: 0.7s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    visibility: visible !important;
+}
+
+@keyframes slideLeft {
+  0%   { transform: translateX(50%); }
+  100% { transform: translateX(0%);   }
+}
+
+@-webkit-keyframes slideLeft {
+   0%  { -webkit-transform: translateX(50%); }
+  100% { -webkit-transform: translateX(0%);  }
+}
+
+.slideLeft-fast {
+    animation-name: slideLeft;
+    -webkit-animation-name: slideLeft;
+    animation-duration: 0.4s;
+    -webkit-animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    visibility: visible !important;
+}
+
+.main-title {
+  	color: #f9f1e9;
+    font-weight: bold;
+  	text-align: left;
+    text-shadow: 3px 2px rgba(0, 9, 0, 0.3);
+}
+.input-group-button i {
+  padding: 5px;
+  text-align: center;
+}
+
+.icon-button {
+	background-color: white;
+	border-radius: 3.6rem;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 2.0rem;
+	height: 3.6rem;
+	line-height: 3.6rem;
+	margin: 0 5px;
+	position: relative;
+	text-align: center;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	width: 3.6rem;
+}
+
+ul {
+  list-style: none
+}
+a {
+  text-decoration: none
+}
+.generic-anchor {
+	color: #fff;
+	&:visited {
+		color: #fff;
+	}
+	&:hover {
+		color: #ccc;
+	}
+}
+
+.flex-rw {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.tf {
+  color:#fff;
+  font-size: 0.75rem;
+}
+
+//This main is mostly to push the footer to the bottom and for demo purposes.
+main {
+  flex: 1 1 auto; //For IE11
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 10em "Oswald", sans-serif;
+  color: rgb(155,155,155);
+  line-height: 1;
+}
+footer {
+  margin-top: auto;
+  width: 100%
+}
+.footer-list-top {
+  width: 33.333%
+}
+.footer-list-top > li {
+  text-align: center;
+  padding-bottom: 10px
+}
+.footer-list-header {
+  padding: 10px 0 5px 0;
+  color: #fff;
+  font: 2.3vw "Oswald", sans-serif
+}
+.footer-list-anchor {
+  font: 1.3em "Open Sans", sans-serif
+}
+.footer-social-section {
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  margin-top: 5px;
+}
+.footer-social-section::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 10px;
+  border-top: 1px solid #ccc;
+  width: calc(100% - 20px)
+}
+.footer-social-overlap {
+  position: relative;
+  z-index: 2;
+  background: rgb(21,48,68);
+  padding: 0 20px
+}
+.footer-social-connect {
+  display: flex;
+  align-items: center;
+  font: 1.5em "Oswald", sans-serif;
+  color: #fff
+}
+.footer-social-small {
+  font-size: 0.6em;
+  padding: 0px 20px
+}
+.footer-social-overlap > a {
+  font-size: 1.5em
+}
+.footer-social-overlap > a:not(:first-child) {
+  margin-left: 0.38em
+}
+.footer-bottom-section {
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  margin-top: 10px
+}
+.footer-bottom-section > div:first-child {
+  margin-right: auto
+}
+.footer-bottom-wrapper {
+  font-size: 1.5em;
+  color: #fff
+}
+.footer-address {
+  display: inline;
+  font-style: normal
+}
+@media only screen and (max-width: 768px) {
+  .footer-list-header {
+    font-size: 2em
+  }
+  .footer-list-anchor {
+    font-size: 1.1em
+  }
+  .footer-social-connect {
+    font-size: 1.5em
+  }
+  .footer-social-overlap > a {
+    font-size: 1.24em
+  }
+  .footer-bottom-wrapper {
+    font-size: 1.3em
+  }
+}
+@media only screen and (max-width: 568px) {
+  main {
+    font-size: 5em
+  }
+  .footer-list-top {
+    width: 100%
+  }
+  .footer-list-header {
+    font-size: 1.5em;
+  }
+  .footer-list-anchor {
+    font-size: 1.5em;
+  }
+  .footer-social-section {
+    justify-content: center;
+  }
+  .footer-social-section::after {
+    top: 25%;
+  }
+  .footer-social-connect {
+    margin-bottom: 10px;
+    padding: 0 10px
+  }
+  .footer-social-overlap {
+    display: flex;
+    justify-content: center;
+  }
+  .footer-social-icons-wrapper {
+    width: 100%;
+    padding: 0
+  }
+  .footer-social-overlap > a:not(:first-child) {
+    margin-left: 20px;
+  }
+  .footer-bottom-section {
+    padding: 0 5px 10px 5px;
+  }
+  .footer-bottom-wrapper {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px
+  }
+}
+@media only screen and (max-width: 480px) {
+  .footer-social-overlap > a {
+    margin: auto
+  }
+  .footer-social-overlap > a:not(:first-child) {
+    margin-left: 0;
+  }
+  .footer-bottom-rights {
+    display: block
+  }
+}
+@media only screen and (max-width: 320px) {
+  .footer-list-header {
+    font-size: 2.2em;
+  }
+  .footer-list-anchor {
+    font-size: 1.2em;
+  }
+  .footer-social-connect {
+    font-size: 1.4em;
+  }
+  .footer-social-overlap > a {
+    font-size: 2.24em;
+  }
+  .footer-bottom-wrapper {
+    font-size: 1.3em;
+  }
+}
+
+@mixin colored-switches ($switch-background-active) {
+  input:checked ~ .switch-paddle {
+    background: $switch-background-active;
+  }
+}
+
+.switch {
+  &,
+
+  &.primary {
+    @include colored-switches($primary-color)
+  }
+
+  &.secondary {
+    @include colored-switches($secondary-color)
+  }
+
+  &.success {
+    @include colored-switches($success-color)
+  }
+
+  &.alert {
+    @include colored-switches($alert-color)
+  }
+
+  &.warning {
+    @include colored-switches($warning-color)
+  }
+}
+
+.bsd-logo {
+  width: 50%;
+  height: auto;
+}
+
+.vcenter {
+position: relative;
+top: 30%;
+transform: translateY(-30%);
+}
+
+
+@mixin colored-switches ($switch-background-active) {
+  input:checked ~ .switch-paddle {
+    background: $switch-background-active;
+  }
+}
+
+.switch {
+  &,
+
+  &.primary {
+    @include colored-switches($primary-color)
+  }
+
+  &.secondary {
+    @include colored-switches($secondary-color)
+  }
+
+  &.success {
+    @include colored-switches($success-color)
+  }
+
+  &.alert {
+    @include colored-switches($alert-color)
+  }
+
+  &.warning {
+    @include colored-switches($warning-color)
+  }
+}
+
+.wrapper {
+  width: 900px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.small-text-size {
+  font-size: 0.75rem;
+}
+
+.red-text {
+  color: red;
+}

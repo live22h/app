@@ -1,0 +1,46 @@
+<script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(init);
+    var myMap,
+        myPlacemark;
+
+    function init(){
+        myMap = new ymaps.Map ("map", {
+            center: [<%= @storage.latitude %>, <%= @storage.longitude %>],
+            zoom: 14
+        });
+
+        myPlacemark = new ymaps.Placemark([<%= @storage.latitude %>, <%= @storage.longitude %>], {
+            hintContent: 'Балтийская служба доставки'
+        }, {
+        iconImageHref: 'http://tee.su/m/images/bsd-location.png',
+        iconImageSize: [30, 42],
+        iconImageOffset: [-3, -42]
+    });
+
+        myMap.geoObjects.add(myPlacemark);
+    }
+</script>
+
+<% branch = Branch.find(@storage.branch_id) %>
+
+<p id="notice"><%= notice %></p>
+<div class="grid-x callout grid-margin-x" style="min-height: 350px">
+  <div class="cell small-12 medium-6">
+    <%= image_tag(branch.background.url) if branch.background? %>
+    <p>
+      <strong>Адрес: </strong><%= @storage.address %><br>
+      <strong>Телефон: </strong><%= tel_to branch.phone %><br>
+      <strong>E-mail: </strong><%= mail_to branch.email %>
+    </p>
+    <strong>О филиале:</strong>
+    <p>
+      <%= branch.description %>
+    </p>
+  </div>
+  <div class="cell small-12 medium-6">
+    <div id="map" style="width: 100%; height: 100%;"></div>
+  </div>
+</div>
+<!-- <%= link_to 'Edit', edit_storage_path(@storage) %> |
+<%= link_to 'Back', storages_path %> -->

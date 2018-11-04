@@ -1,0 +1,198 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+.color-case { background: #00aba9;}
+.color1 { background: rgb(210, 150,   0);}
+.color2 { background: rgb(100, 150, 200);}
+.color3 { background: rgb(150, 200, 100);}
+.color4 { background: rgb(232,  13,  56);}
+.color5 { background: rgb( 92, 189, 203);}
+.color6 { background: rgb(249, 203,  47);}
+.color7 { background: rgb(102, 103, 193);}
+.color8 { background: rgb( 40, 240, 190);}
+.color9 { background: #004050;  }
+.color10 { background: mintcream;}
+.color11 { background: white;    }
+.color12 { background: #59554F;  }
+.color13 { background: #d61300;  }
+.color14 { background: #00a9ec;  }
+.color15 { background: #ff9000;  }
+.color16 { background: #0e5d30;  }
+.color17 { background: #8b0189;  }
+.color18 { background: #ce4e4e;  }
+.color19 { background: #9bf9b0;  }
+.color20 { background: #00ff00;  }
+.color21 { background: #95C10D;  }
+.color22 { background: #19bfe5;  }
+.color23 { background: #5AC6FA;  }
+.color24 { background: #d64136;  }
+.color25 { background: #3b5998;  }
+.color26 { background: #fe0000;  }
+.color27 { background: #0c5fa1;  }
+.color28 { background: #2546e9;  }
+.color29 { background: #f68935;  }
+.color30 { background: #c8312b;  }
+.color31 { background: #007491;  }
+.color32 { background: #002f3b;  }
+
+.big-icon {
+  margin: 5px;
+  width: 80%;
+  height: 80%;
+  position: relative;
+}
+.medium-icon {
+  margin: 5px;
+  width: 90%;
+  height: 90%;
+  position: relative;
+}
+.small-icon {
+  width: 90%;
+  height: 90%;
+  position: relative;
+}
+.rect-icon {
+  margin-left: 0px;
+  margin-top: 5px;
+  width: 95%;
+  height: 95%;
+  position: relative;
+}
+
+#main-banner {
+  max-height: 50%;
+  margin-left: 5px;
+}
+
+.xcard {
+  border: solid 1px #e2e2e2;
+  position: relative;
+  margin: 2px;
+  color: #fff;
+  text-align: center;
+  font-family: "Open Sans", arial;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  cursor: pointer;
+}
+.xcrard-small {
+  width: 96%;
+  height: 96%;
+}
+
+.xcrard-medium {
+  width: 98%;
+  height: 98%;
+}
+.xcrard-large {
+  width: 99%;
+  height: 99%;
+}
+
+.xcard-rect-text {
+  margin-top: 30px;
+}
+
+.xcard-title {
+  font-size: 1.2 rem;
+}
+.xcard:hover {
+  border: solid 1px #fff ;
+  opacity: 1;
+}
+
+.xcard:active {
+  transform: scale(.98, .98);
+}
+.xcard > i {
+  margin-top: 10px;
+}
+.box{
+	position: relative;
+	width: 100%;		/* desired width */
+}
+.box:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+.rect{
+	position: relative;
+	width: 100%;		/* desired width */
+}
+.rect:before{
+	content: "";
+	display: block;
+	padding-top: 50%; 	/* initial ratio of 1:1*/
+}
+.xcard > p {
+  margin-top: -15px;
+}
+
+.calc-form {
+  margin-left: 5px;
+  height: 98%;
+  position: relative;
+}
+
+
+.responsive-box {
+	position: relative;
+	width: 30%; /* Произвольная ширина, которая требуется для блока */
+}
+.responsive-box::before {
+	content: "";
+	display: block;
+	padding-top: 100%; /* С помощью этого padding мы задаем высоту равную ширине блока */
+}
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: url(images/bg.jpg) no-repeat center center; /* Задаем фон, если требуется */
+    background-size: cover; /* Растягиваем фон под размеры блока, если требуется */
+}
+
+.htooltip span { /* Внешний вид нашего тултипа */
+	background-color: rgba(0,0,0, 0.8);
+	border-radius: 15px 15px 15px 0px;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	color: #fff;
+	margin-left: 10px;
+	margin-top: -35px;
+	opacity: 0;
+	padding: 10px;
+	position: absolute;
+	text-decoration: none;
+	visibility: hidden;
+	width: 350px;
+	z-index: 10;
+}
+
+.htooltip:hover span {
+	opacity: 1;
+	visibility: visible;
+  font-size: 0.65rem;
+}
+
+.htooltip-right span {
+  border-radius: 15px 15px 0px 15px;
+  padding: 10px;
+	margin-left: -350px;
+}
+
+.htooltip span img {
+	border: 0 none;
+	float: left;
+	margin: -71px 0 0 -234px;
+	opacity: 0;
+	position: absolute;
+	visibility: hidden;
+	z-index: -1;
+}
+
+.htooltip:hover span img {
+	opacity: 1;
+	visibility: visible;
+}

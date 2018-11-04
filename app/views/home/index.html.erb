@@ -1,0 +1,213 @@
+<script type="text/javascript">
+  window.onload = function () {
+    jQuery("#user-city").text(ymaps.geolocation.city);
+  }
+</script>
+
+<div class="grid-x slideLeft">
+  <div class="cell small-12 small-order-1 medium-order-1 medium-6 large-order-1 large-3">
+    <div class="grid-y">
+      <div class="cell small-8">
+        <div class="grid-x">
+        <div class="cell small-8">
+          <div class='box'>
+          	<div class='content'><a href="<%= about_path %>">
+              <div class="xcard xcrard-large color4">
+                <%= inline_svg "logo-white.svg", class: 'big-icon' %>
+              </div></a>
+            </div>
+          </div>
+        </div>
+        <div class="cell small-4">
+          <div class="grid-x">
+            <div class="cell small-12">
+              <div class='box'>
+              	<div class='content'>
+                  <div class='box'>
+                  	<div class='content'><a href="<%= branch_list_path %>">
+                      <div class="xcard xcrard-medium color1">
+                        <%= inline_svg "location.svg", class: 'medium-icon' %>
+                        <p id="user-city" style="display:none">Ближайший офис</p>
+                      </div></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="cell small-12">
+              <div class='box'>
+              	<div class='content'>
+                  <div class="xcard xcrard-medium color2">
+                    <%= inline_svg "search.svg", class: 'medium-icon' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="cell small-4">
+        <div class="grid-x">
+          <div class="cell small-4">
+            <div class='box'>
+            	<div class='content'>
+                <a href = "<% if user_signed_in? %>
+                  <%= persons_profile_path %>
+                <% else %>
+                  <%= new_user_session_path %>
+                <% end %>">
+                <div class="xcard xcrard-medium color27">
+                  <%= inline_svg "user.svg", class: 'medium-icon' %>
+                </div></a>
+              </div>
+            </div>
+          </div>
+          <div class="cell small-8">
+            <div class='rect'>
+            	<div class='content'><a class="htooltip" href="<%= new_order_path %>">
+                <div class="xcard color14 xcrard-medium">
+                      <%= inline_svg "truck.svg", class: 'rect-icon' %>
+                </div></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cell small-4 show-for-large">
+        <div class="grid-x">
+          <div class="cell small-4">
+            <div class="grid-x">
+              <div class="cell small-6">
+                <div class='box'>
+                	<div class='content'><a class="htooltip" href="<%= loyalty_path %>">
+                    <span><b>Программа лояльности клиентов</b><br>
+                      <% if user_signed_in? %>
+              На вашем бонусном счету: <%= amount_coin(current_user.id) %> руб.
+            <% else %>
+              Зарегистрируйтесь на нашем сайте и получите 100 рублей на свой бонусный счет
+            <% end %>
+                    </span>
+                    <div class="xcard xcrard-small color29">
+                      <%= inline_svg "gift.svg", class: 'small-icon' %>
+                    </div>
+                  </a></div>
+                </div>
+              </div>
+              <div class="cell small-6">
+                <div class='box'>
+                	<div class='content'>
+                    <div class="xcard xcrard-small color21">
+                      <%= inline_svg "info.svg", class: 'small-icon' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cell small-6">
+                <div class='box'>
+                	<div class='content'><a class="htooltip"  href="<%= new_post_path %>">
+                    <span><b>Служба контроля качества</b><br>Напишите, что Вы думаете о нашей работе,<br>Ваш отзыв очень важен для нас</span>
+                    <div class="xcard xcrard-small color12">
+                      <%= inline_svg "complaint.svg", class: 'small-icon' %>
+                    </div></a>
+                  </div>
+                </div>
+              </div>
+              <div class="cell small-6">
+                <div class='box'>
+                	<div class='content'>
+                    <div class="xcard xcrard-small color-case">
+                      <%= inline_svg "case.svg", class: 'small-icon' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell small-8">
+            <div class='rect'>
+              <div class='content'>
+                <div class="xcard xcrard-medium color-case">
+слайды
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cell small-12 small-order-3 medium-order-3 medium-12 large-order-2 large-6">
+    <div class="orbit" id="main-banner" role="region" aria-label="Балтийская служба доставки" data-orbit data-use-m-u-i="false" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out; data-bullets:false; data-auto-play:true; data-timer-delay:1000; data-infinite-wrap:true;">
+      <div class="orbit-wrapper">
+        <ul class="orbit-container">
+        <% @banners.each do |banner| %>
+          <li class="orbit-slide">
+            <figure class="orbit-figure">
+              <%= image_tag(banner.picture.url, class: 'orbit-image') if banner.picture? %>
+              <figcaption class="orbit-caption"><%= banner.description %></figcaption>
+            </figure>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cell small-12 small-order-2 medium-order-2 medium-6 large-order-3 large-3">
+    <form class="callout text-center calc-form" data-abide novalidate>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12">
+              <h4>Расчет стоимости</h4>
+        </div>
+        <div class="cell small-12">
+          <div class="floated-label-wrapper">
+            <label for="fromCity">Забрать груз в городе:</label>
+            <input id="fromCity" class="kladrCity input-kladr" placeholder="Отправитель" autocomplete="on" data-kladr-type="city" type="text" required>
+          </div>
+        </div>
+        <div class="cell small-12">
+          <div class="floated-label-wrapper">
+            <label for="toCity">Доставить в город:</label>
+            <input type="text" id="toCity" class="kladrCity input-kladr" name="full name input" placeholder="Получатель" required>
+          </div>
+        </div>
+        <div class="cell small-6">
+          <div class="floated-label-wrapper">
+            <label for="cargoWeight">Вес в, кг:</label>
+            <input type="text" id="cargoWeight" name="cargoWeight" placeholder="Вес" required pattern="number">
+          </div>
+        </div>
+        <div class="cell small-6">
+          <div class="floated-label-wrapper">
+            <label for="cargoVolume">Объем, м<sup>3</sup>:</label>
+            <input type="text" id="cargoVolume" name="cargoVolume" placeholder="Объем" required pattern="number">
+          </div>
+        </div>
+        <div class="cell small-12">
+          <div class="floated-label-wrapper input-group">
+            <div class="input-group">
+              <label for="email">Отправить расчет:</label>
+              <% if user_signed_in? %>
+                <input class="input-group-field" id="email" type="email" placeholder="Введите e-mail" pattern="email" value="<%= current_user.email %>">
+              <% else %>
+                <input class="input-group-field" id="email" type="email" placeholder="Введите e-mail" pattern="email">
+              <% end %>
+              <div class="input-group-button htooltip htooltip-right">
+                <span>Хотите сохранить или поделиться этим расчетом?<br>Отправьте его на электронную почту</span>
+                <input class="button expanded info" style="font-family: FontAwesome; font-size: 1.3rem;" type="submit" value="&#xf14d;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cell small-12">
+          <a href="<%= new_order_path %>" class="button expanded color27">Оформить перевозку <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

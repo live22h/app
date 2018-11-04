@@ -1,0 +1,55 @@
+<%= simple_form_for(@storage) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs callout">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-12">
+        <%= f.association :branch, label: 'Филиал' %>
+      </div>
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :address, label: 'Адрес склада', as: :string, :placeholder => "Адрес склада" %>
+      </div>
+      <div class="cell small-6 floated-label-wrapper">
+        <%= f.input :latitude, as: :string, label: 'Широта:', :placeholder => 'Широта' %>
+      </div>
+      <div class="cell small-6 floated-label-wrapper">
+        <%= f.input :longitude, as: :string, label: 'Долгота', :placeholder => 'Долгота' %>
+      </div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--[if lt IE 10]>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/js/jquery.suggestions.min.js"></script>
+    <script type="text/javascript">
+    var showClass = 'show';
+
+    $('input').on('checkval', function () {
+      var label = $(this).prev('label');
+      if (this.value !== '') {
+        label.addClass(showClass);
+      } else {
+        label.removeClass(showClass);
+      }
+    }).on('keyup', function () {
+      $(this).trigger('checkval');
+    });
+        $("#storage_address").suggestions({
+            token: "f2bbb5624fd5b6295a9207033ca2449935340869",
+            type: "ADDRESS",
+            count: 5,
+            onSelect: function(suggestion) {
+                $("#storage_latitude").val(suggestion["data"]["geo_lat"]);
+                $("#storage_longitude").val(suggestion["data"]["geo_lon"]);
+            }
+        });
+    </script>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Добавить склад' %>
+  </div>
+<% end %>

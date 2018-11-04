@@ -1,0 +1,27 @@
+<div class="callout">
+  <div class="grid-x grid-margin-x grid-margin-y">
+    <div class="cell small-12 medium-6">
+      <h3>Уважаемый Клиент!</h3><br>
+      <p>Каждый сотрудник "Балтийской службы доставки" является профессионалом своего дела, но нет предела совершенству, поэтому, если у Вас есть предложения или замечания по работе, если знаете как повысить качество наших услуг, напишите нам.</p>
+      <p>Напишите директору филиала, опишите свое предложение, Ваш отзыв очень важен для нас.</p><br>
+      <p><i>С уважением, коллектив ТК "Балтийская служба доставки"</i></p>
+    </div>
+    <div class="cell small-12 medium-6 align-middle">
+      <%= simple_form_for(@post) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-inputs">
+          <%= f.association :branch, label: "Филиал:" %>
+          <%= f.association :title, label: "Тема сообщения:" %>
+          <%= f.input :message, label: "Текст:" %>
+          <%= f.input :email, label: "Ваш E-mail:" %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Отправить" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

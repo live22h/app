@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title><%= content_for?(:title) ? yield(:title) : "Балтийская служба доставки" %></title>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet"/>
+    <!--[if lt IE 10]> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script> <![endif]-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/js/jquery.suggestions.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+
+
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <p class="notice callout info"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+      <div class="grid-y full" style="height:95%">
+        <div class="cell small-1 slideLeft-fast">
+          <div class="grid-x">
+            <div class="cell small-12 medium-9">
+              <h1 class="main-title"><a href="javascript:history.back()"><% unless current_page?(root_path) %>
+                <%= fa_icon "angle-double-left" %>
+                <% end %>
+                <%= @title %></a></h1>
+            </div>
+            <div class="medium-3 show-for-medium tf">
+              <span>
+                <% if user_signed_in? %>
+  <span>Здравствуйте, <%= current_user.name %>&nbsp;<%= current_user.otch %> <br>На вашем бонусном счету: <%= amount_coin(current_user.id) %> руб.</span>
+  <br>
+   <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+<% else %>
+Зарегистрируйтесь на нашем сайте и получите 100 рублей на свой бонусный счет<br>
+  <%= link_to 'Войти ', new_user_session_path %> или
+  <%= link_to ' Зарегистрироваться', new_user_registration_path %>
+<% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="cell small-10">
+          <%= yield %>
+        </div>
+        <div class="cell small-1">
+
+
+          <footer class="flex-rw">
+              <section class="footer-social-section flex-rw">
+                <span class="footer-social-overlap footer-social-connect">
+                Мы в соцсетях</span>
+                <span class="footer-social-overlap footer-social-icons-wrapper">
+                  <a href="https://vk.com/bsdtrans" class="generic-anchor" target="_blank" title="ВКонтакте" itemprop="significantLink"><i class="fa fa-vk"></i></a>
+                  <a href="https://vk.com/bsdtrans" class="generic-anchor" target="_blank" title="Одноклассники" itemprop="significantLink"><i class="fa fa-odnoklassniki"></i></a>
+                  <a href="https://vk.com/bsdtrans" class="generic-anchor" target="_blank" title="Instagram" itemprop="significantLink"><i class="fa fa-instagram"></i></a>
+                  <a href="https://vk.com/bsdtrans" class="generic-anchor" target="_blank" title="Youtube" itemprop="significantLink"><i class="fa fa-youtube"></i></a>
+                </span>
+            </section>
+          </footer>
+        </div>
+      </div>
+  </body>
+</html>

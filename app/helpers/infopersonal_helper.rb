@@ -1,0 +1,2 @@
+module InfopersonalHelper
+end

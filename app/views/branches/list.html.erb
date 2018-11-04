@@ -1,0 +1,14 @@
+<div class="callout" style="">
+<% @branches.each do |branch| %>
+    <details><summary><b><%= branch.name %></b></summary>
+      <ul>
+    <% storages = Storage.where(branch_id: branch.id) %>
+      <% storages.each do |st| %>
+        <li>
+        <%= link_to st.address, st %>
+        </li>
+      <% end %>
+      </ul>
+    </details>
+<% end %>
+</div>

@@ -1,0 +1,18 @@
+<%= inline_svg "invoice.svg", class: 'small-12 medium-4 column dashboard-nav-card-icon' %>
+git push -f heroku master:master
+
+#61849c
+
+
+<div class="row collapse">
+  <div class="small-12 medium-2 column">
+
+  </div>
+  <div class="small-12 medium-2 column end">
+
+
+  </div>
+</div>
+
+
+KLADR token: '5b8edc2c0a69dec8118b4632',

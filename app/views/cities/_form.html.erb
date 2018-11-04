@@ -1,0 +1,31 @@
+<%= simple_form_for(@city) do |f| %>
+<%= f.error_notification %>
+<%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+<div class="form-inputs">
+  <%= f.input :name %>
+  <%= f.input :kladr_id, :as => :hidden %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit %>
+</div>
+
+<script type="text/javascript">
+    $("#city_name").suggestions({
+        token: "f2bbb5624fd5b6295a9207033ca2449935340869",
+        type: "ADDRESS",
+        hint: false,
+        bounds: "city",
+        constraints: {
+          label: "",
+            locations: { city_type_full: "город" }
+        }, /* Вызывается, когда пользователь выбирает одну из подсказок */
+        onSelect: function(suggestion) {
+            // console.log(suggestion);
+            $("#city_name").val(suggestion["data"]["city"]);
+            $("#city_kladr_id").val(suggestion["data"]["city_kladr_id"]);
+        }
+    });
+</script>
+<% end %>

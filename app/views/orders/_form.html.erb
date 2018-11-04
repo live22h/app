@@ -1,0 +1,228 @@
+<div class="form-inputs  callout" data-abide="data-abide" novalidate="novalidate">
+  <div class="wizard">
+    <%= simple_form_for(@order) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <fieldset  class="slideLeft active">
+      <legend>Сведения о грузе</legend>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.association :cargo, label: 'Характер груза', required: true %>
+        </div>
+        <div class="cell small-4 floated-label-wrapper">
+          <%= f.input :weight, as: :string, label: 'Вес, кг', required: true, :placeholder => "Вес, кг", input_html: { pattern:'number'} %>
+        </div>
+        <div class="cell small-4 floated-label-wrapper">
+          <%= f.input :volume, as: :string, label: 'Объем(м3)', required: true, :placeholder => "Объем(м3)", input_html: { pattern:'number'} %>
+        </div>
+        <div class="cell small-4 floated-label-wrapper">
+          <%= f.input :amount, as: :string, label: 'Мест', :placeholder => "Мест", input_html: { pattern:'number'} %>
+        </div>
+        <div class="cell small-6 shrink">
+          <%= f.input :frail, as: :boolean, checked_value: true, unchecked_value: false, label: 'Хрупкий' %>
+        </div>
+        <div class="cell small-6 auto">
+          <%= f.input :oversized, as: :boolean, checked_value: true, unchecked_value: false, label: 'Негабарит' %>
+        </div>
+        <div class="cell small-12 medium-6 floated-label-wrapper">
+          <%= f.input :from_city, as: :string, label: 'Откуда', required: true, :placeholder => "Откуда", input_html: { class:'kladrCity input-kladr'} %>
+        </div>
+        <div class="cell small-12 medium-6 floated-label-wrapper">
+          <%= f.input :to_city, as: :string, label: 'Куда', required: true, :placeholder => "Куда", input_html: { class:'kladrCity input-kladr'} %>
+        </div>
+        <div class="cell small-12 medium-4 floated-label-wrapper">
+          <%= f.input :dt, as: :string, label: 'Дата исполнения (подачи авто)', required: true, :placeholder => "Дата исполнения (подачи авто)" %>
+        </div>
+        <div class="cell small-12 medium-8">
+          <p class="small-text-size">ВНИМАНИЕ! Заявки принимаются в работу с 9.00 до 16.00 за сутки до исполнения. Погрузка а/м 30 минут, простой каждого последующего часа оплачивается согласно тарифам.</p>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="slideLeft">
+      <legend>Информация об отправителе</legend>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.input :shipper, label: 'Отправитель ООО или ИП', :placeholder => 'Отправитель ООО или ИП' %>
+        </div>
+        <div class="cell small-12 medium-8 floated-label-wrapper">
+          <%= f.input :shipper_person, label: 'Контактное лицо', required: true, :placeholder => 'Контактное лицо' %>
+        </div>
+        <div class="cell small-12 medium-4 floated-label-wrapper">
+          <%= f.input :shipper_phone, label: 'Телефон', required: true, :placeholder => 'Телефон', input_html: { pattern:'number'} %>
+        </div>
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.input :shipper_address, :placeholder => 'Адрес' %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="slideLeft">
+      <legend>Получатель груза</legend>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.input :consignee, label: 'Получатель', :placeholder => 'Получатель' %>
+        </div>
+        <div class="cell small-12 medium-8 floated-label-wrapper">
+          <%= f.input :consignee_person, label: 'Контактное лицо', required: true, :placeholder => 'Контактное лицо' %>
+        </div>
+        <div class="cell small-12 medium-4 floated-label-wrapper">
+          <%= f.input :consignee_phone, label: 'Телефон', required: true, :placeholder => 'Телефон', input_html: { pattern:'number'} %>
+        </div>
+        <div class="cell small-12">Заполните поле адрес, если нужна доставка до двери</div>
+        <div class="cell small-12">
+          <%= f.input :consignee_address, label: false, :placeholder => 'Адрес' %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="slideLeft">
+      <legend>Плательщик</legend>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-12 medium-6">
+          <label for="payer_type">Кто оплачивает перевозку</label>
+          <select id="payer_type">
+            <option value="1">Отправитель</option>
+            <option value="2">Получатель</option>
+            <option value="3" selected="selected">Третье лицо</option>
+          </select>
+        </div>
+        <div class="cell small-12 medium-6">
+          <%= f.association :payment, label: 'Способ оплаты' %>
+        </div>
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.input :payer, label:'Плательщик', :placeholder => 'Плательщик' %>
+        </div>
+        <div class="cell small-12 floated-label-wrapper">
+          <%= f.input :details, label: 'Реквизиты', :placeholder => 'Реквизиты плательщика' %>
+        </div>
+        <div class="cell small-12 medium-6 floated-label-wrapper">
+          <%= f.input :person, label: 'Заявку заполнил', :placeholder => 'Заявку заполнил' %>
+        </div>
+        <div class="cell small-12 medium-6 floated-label-wrapper">
+          <%= f.input :email, label: 'E-mail', required: true, :placeholder => 'E-mail', input_html: { pattern:'email'} %>
+        </div>
+      </div>
+    </fieldset>
+    <%= f.association :user, :as => :hidden %>
+
+    <div class="buttons">
+      <a class="button secondary prev left" id="prev">Назад</a>
+      <a class="button secondary next right" id="next">Вперед</a>
+
+      <%= f.button :submit, "Готово", class: "submit right" %>
+    </div>
+  <% end %>
+</div>
+</div>
+<script>
+// new_order
+$('#new_order').on('submit', function(){
+  // здесь проверяем что хотим, показываем ошибки или return true.
+  var $s = "";
+
+  alert("11");
+});
+
+$('#next').click(function () {
+  $('fieldset.active').removeClass('active').next('fieldset').addClass('active');
+});
+
+$('#prev').click(function () {
+  $('fieldset.active').removeClass('active').prev('fieldset').addClass('active');
+})
+
+$.datetimepicker.setLocale('ru');
+$('#order_dt').datetimepicker({lang: 'ru', timepicker: false, format: 'd/m/Y', formatDate: 'Y/m/d', minDate: '<%= Date.today + 1 %>'});
+
+$("#order_shipper_address").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+$("#order_consignee_address").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+
+$("#order_shipper").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+$("#order_consignee").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+
+$("#order_shipper_person").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "NAME", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+$("#order_consignee_person").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "NAME", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+$("#order_consignee_address").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+
+$('#checkPayer1').click(function () {
+  $("#payerOrganization").prop('disabled', true);
+});
+
+$('#checkPayer2').click(function () {
+  $("#payerOrganization").prop('disabled', true);
+});
+$('#checkPayer3').click(function () {
+  $("#payerOrganization").prop('disabled', false);
+});
+
+$("#order_payer").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+
+$("#order_person").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "NAME", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+  }
+});
+
+$('#payer_type').change(function () {
+  switch ($(this).val()) {
+    case "1":
+      $('#order_payer').val($("#order_shipper").val());
+      break;
+    case "2":
+      $('#order_payer').val($("#order_consignee").val());
+      break;
+    case "3":
+      $('#order_payer').val('');
+      break;
+  }
+});
+</script>
