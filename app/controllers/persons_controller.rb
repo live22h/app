@@ -4,5 +4,6 @@ class PersonsController < ApplicationController
     @title = "Личный кабнет"
 
     @user_orders = Order.where(user_id: current_user.id)
+    @roles = current_user.roles
   end
 end

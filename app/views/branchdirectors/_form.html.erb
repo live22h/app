@@ -1,0 +1,18 @@
+
+<%= simple_form_for(@branchdirector) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="cell small-12 floated-label-wrapper">
+      <%= f.association :user, :as => :autocomplete, :source => users_path, label: 'Пользователь' %>
+    </div>
+    <div class="cell small-12 floated-label-wrapper">
+      <%= f.association :branch, label: 'Филиал' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

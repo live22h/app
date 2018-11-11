@@ -150,8 +150,8 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: url(images/bg.jpg) no-repeat center center; /* Задаем фон, если требуется */
-    background-size: cover; /* Растягиваем фон под размеры блока, если требуется */
+    // background: url(images/bg.jpg) no-repeat center center; /* Задаем фон, если требуется */
+    // background-size: cover; /* Растягиваем фон под размеры блока, если требуется */
 }
 
 .htooltip span { /* Внешний вид нашего тултипа */
@@ -195,4 +195,25 @@
 .htooltip:hover span img {
 	opacity: 1;
 	visibility: visible;
+}
+
+.mini-baner-slide {
+  padding: 0.6rem;
+  color: #fefefe;
+
+  .orbit-slide:nth-of-type(1) & {
+    background: dodgerblue;
+  }
+
+  .orbit-slide:nth-of-type(2) & {
+    background: rebeccapurple;
+  }
+
+  .orbit-slide:nth-of-type(3) & {
+    background: darkgoldenrod;
+  }
+
+  .orbit-slide:nth-of-type(4) & {
+    background: lightseagreen;
+  }
 }

@@ -1,10 +1,21 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  include ApplicationHelper
+  include AdduserHelper
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @title = "Проверить статус заявки"
+    unless params[:q].blank?
+      params[:q][:code_eq] = params[:q][:code_eq].upcase.gsub(/[СТЕКМНРАВХ]/, 'С'=> 'C','Т'=> 'T','Е'=> 'E','К'=> 'K','М'=> 'M','Н'=> 'H','Р'=> 'P','А'=> 'A','В'=> 'B','Х'=> 'X')
+      puts params[:q][:code_eq]
+      @search = Order.search(params[:q])
+      @orders = @search.result
+    else
+      @search = Order.none.search
+      @orders = []
+    end
   end
 
   # GET /orders/1
@@ -27,19 +38,25 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    new_user_password = ""
+    @is_new_user = false
     if user_signed_in?
       @order.user_id = current_user.id
       @order.person = "#{current_user.family} #{current_user.name} #{current_user.otch}"
       @order.email = current_user.email
-    elsif User.where(email: "rus@5g.su").take!
-      u = User.where(email: "rus@5g.su").take
-      @order.user_id = u.id
-      @order.person = "#{u.family} #{u.name} #{u.otch}"
-      @order.email = current_user.email
     else
-    end
+      new_user_password = gen_password
+      @order.user_id = add_user(@order.person, @order.email, new_user_password)
 
+      puts "---------------------------------"
+      puts "It's new: #{@is_new_user}, #{new_user_password}"
+      new_user_password = (@is_new_user) ? new_user_password : ""
+      puts "It's new: #{@is_new_user}, #{new_user_password}"
+      puts "---------------------------------"
+    end
+    code = order_code(@order)
+    @order.code = code
+    @order.status_id = 1
     respond_to do |format|
       if @order.save
         # redirect_to :profile_path
@@ -50,6 +67,8 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+    orderuser = User.find_by_id(@order.user_id)
+    ApplicationMailer.new_order(@order, orderuser, new_user_password).deliver
   end
 
   # PATCH/PUT /orders/1
@@ -77,6 +96,14 @@ class OrdersController < ApplicationController
   end
 
   private
+
+    def ransack_params
+      if params[:q].blank?
+        Order.empty_results.search
+      else
+        Order.search(params[:q])
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
@@ -105,6 +132,9 @@ class OrdersController < ApplicationController
         :email,
         :frail,
         :oversized,
-        :user_id)
+        :kladr_from,
+        :kladr_to)
+
+        # ,:code, :status_id, :user_id
     end
 end

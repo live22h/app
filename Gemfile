@@ -78,3 +78,5 @@ gem 'carrierwave'
 gem 'geokit-rails'
 gem 'prawn'
 gem 'factory_girl_rails', :require => false
+gem 'rabl'
+gem 'ransack'

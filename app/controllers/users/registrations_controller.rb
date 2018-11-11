@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if user_signed_in? then
       add_coin(current_user.id, 100)
+      ApplicationMailer.user_welcome(current_user).deliver
     end
   end
 

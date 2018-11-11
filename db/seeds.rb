@@ -35,5 +35,18 @@ Cargo.create(name:'Отделочные материалы',  delicate: false)
 Payment.create(name: 'Наличные')
 Payment.create(name: 'Безналичная оплата')
 
-Role.create(name: 'Администратор')
-Role.create(name: 'Директор филиала')
+Status.create(name: 'Заявка принята')
+Status.create(name: 'Обрабатывается')
+Status.create(name: 'В пути')
+Status.create(name: 'Груз готов к выдаче')
+Status.create(name: 'Груз выдан')
+Status.create(name: 'Заявка закрыта')
+Status.create(name: 'Заявка отклонена')
+
+roles = Role.create([{name: 'Администратор сайта'}, {name: 'Администратор филиала'}, {name:'Менеджер филиала'}])
+admin = User.create(:name => "Admin",
+                    :email => "admin@tee.su",
+                    :password => "@dmin123",
+                    :password_confirmation => "@dmin123")
+Userrole.create(:role_id => roles[0].id,
+                :user_id => admin.id)

@@ -10,45 +10,48 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
 //= require activestorage
-//= require jquery
+//= simple_form.autocomplete
 //= require jquery.kladr.min
 //= require jquery.steps.min
-//= require_tree .
 //= require foundation
+//= require_tree .
 
-$(function () {
+$(function() {
   var showClass = 'show';
 
-  $('input').on('checkval', function () {
+  $('input').on('checkval', function() {
     var label = $(this).prev('label');
-    if(this.value !== '') {
+    if (this.value !== '') {
       label.addClass(showClass);
     } else {
       label.removeClass(showClass);
     }
-  }).on('keyup', function () {
-      $(this).trigger('checkval');
-    });
+  }).on('keyup', function() {
+    $(this).trigger('checkval');
+  });
 
   $('.kladrCity').kladr({
     type: $.kladr.type.city
   });
 
-  $('.input-kladr').on('checkval', function () {
+  $('.input-kladr').on('checkval', function() {
     var label = $(this).prev('label');
-    if(this.value !== '') {
+    if (this.value !== '') {
       label.addClass(showClass);
     } else {
       label.removeClass(showClass);
     }
 
-  }).on('keyup', function () {
+  }).on('keyup', function() {
     $(this).trigger('checkval');
   });
 });
 
 
 $(document).foundation();
-$(function(){ $(document).foundation(); });
+$(function() {
+  $(document).foundation();
+});

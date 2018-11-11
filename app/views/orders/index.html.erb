@@ -1,25 +1,19 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path %>
+<div class="grid-x grid-margin-x callout">
+  <div class="cell small-12 medium-6">
+  <h5>Введите код заявки:</h5>
+  <%= search_form_for @search do |f| %>
+  <%= f.text_field :code_eq, required: true, placeholder: "Код заявки" %>
+  <%= f.submit "Найти", class: "button" %>
+<% end %>
+<% @orders.each do |order| %>
+  Отправка из:
+  <%= order.from_city %><br>
+  Прибытие в:
+  <%= order.to_city %><br></%>
+Статус заявки:
+<b><%= order.status.name %></b><br>
+<% end %>
+<%= link_to 'Подать заявку на доставку груза', new_order_path %>
+</div>
+</div>

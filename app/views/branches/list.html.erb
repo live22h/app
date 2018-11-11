@@ -1,14 +1,18 @@
-<div class="callout" style="">
-<% @branches.each do |branch| %>
-    <details><summary><b><%= branch.name %></b></summary>
+<div class="callout" style="min-height:300px">
+  <% @branches.each do |branch| %>
+    <details>
+      <summary>
+        <b><%= branch.name %></b>
+      </summary>
       <ul>
-    <% storages = Storage.where(branch_id: branch.id) %>
-      <% storages.each do |st| %>
-        <li>
-        <%= link_to st.address, st %>
-        </li>
-      <% end %>
-      </ul>
-    </details>
-<% end %>
-</div>
+        <% storages = Storage.where(branch_id: branch.id) %>
+          <% storages.each do |st| %>
+            <li>
+              <%= link_to st.address, st %>
+            </li>
+          <% end %>
+          <li><%= inline_svg "pdf-icon.svg", size:"16px * 16px" %><%= link_to "Реквизиты (PDF) ", branch_path(branch, :pdf) %></li>
+        </ul>
+      </details>
+    <% end %>
+  </div>

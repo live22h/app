@@ -24,6 +24,16 @@
         <%= f.input :address, label: 'Юр. адрес', as: :string, :placeholder => "Юр. адрес" %>
         <%= f.input :region_kladr_id, :as => :hidden %>
       </div>
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :bank, label: 'Банк', :placeholder => 'Наименование банка или БИК', input_html: { maxlength: 150 } %>
+        <%= f.input :bik, :as => :hidden %>
+      </div>
+      <div class="cell small-4 floated-label-wrapper">
+        <%= f.input :rs, label: 'Р/с', as: :string, :placeholder => "Р/с", input_html: { maxlength: 20 } %>
+      </div>
+      <div class="cell small-4 floated-label-wrapper">
+        <%= f.input :ks, label: 'К/с', as: :string, :placeholder => "К/с", input_html: { maxlength: 20 } %>
+      </div>
       <div class="cell small-6 floated-label-wrapper">
         <%= f.input :phone, label: 'Телефон', :placeholder => 'Телефон' %>
       </div>
@@ -68,6 +78,14 @@ $("#branch_address").suggestions({
   /* Вызывается, когда пользователь выбирает одну из подсказок */
   onSelect: function (suggestion) {
     $("#branch_region_kladr_id").val(suggestion["data"]["region_kladr_id"]);
+  }
+});
+
+$("#branch_bank").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "BANK", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    $("#branch_bik").val(suggestion["data"]["bic"]);
   }
 });
 

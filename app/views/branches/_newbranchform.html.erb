@@ -1,0 +1,64 @@
+<div class="callout info">
+  <%= simple_form_for(@branch) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs callout">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :name, label: 'Краткое наименование (внутренне обозначение)', as: :string, :placeholder => "Краткое наименование (внутренне обозначение)" %>
+      </div>
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => "Email администратора" %>
+      </div>
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => "Email администратора" %>
+      </div>
+      <div class="cell small-12 floated-label-wrapper">
+        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => @rand_password %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'OK' %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+$("#branch_organization").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    console.log(suggestion);
+    $("#branch_ogrn").val(suggestion["data"]["ogrn"]);
+    $("#branch_inn").val(suggestion["data"]["inn"]);
+    $("#branch_kpp").val(suggestion["data"]["kpp"]);
+    $("#branch_address").val(suggestion["data"]["address"]["unrestricted_value"]);
+    $("#branch_region_kladr_id").val(suggestion["data"]["address"]["data"]["region_kladr_id"]);
+
+    $("#branch_director").val(suggestion["data"]['management']['name']);
+  }
+});
+
+$("#branch_address").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
+  /* Вызывается, когда пользователь выбирает одну из подсказок */
+  onSelect: function (suggestion) {
+    $("#branch_region_kladr_id").val(suggestion["data"]["region_kladr_id"]);
+  }
+});
+
+  var showClass = 'show';
+
+  $('input').on('checkval', function () {
+    var label = $(this).prev('label');
+    if (this.value !== '') {
+      label.addClass(showClass);
+    } else {
+      label.removeClass(showClass);
+    }
+  }).on('keyup', function () {
+    $(this).trigger('checkval');
+  });
+</script>

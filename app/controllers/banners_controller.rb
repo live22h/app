@@ -28,7 +28,7 @@ class BannersController < ApplicationController
 
     respond_to do |format|
       if @banner.save
-        format.html { redirect_to @banner, notice: 'Banner was successfully created.' }
+        format.html { redirect_to @banner, notice: 'Баннер создан' }
         format.json { render :show, status: :created, location: @banner }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class BannersController < ApplicationController
   def update
     respond_to do |format|
       if @banner.update(banner_params)
-        format.html { redirect_to @banner, notice: 'Banner was successfully updated.' }
+        format.html { redirect_to @banner, notice: 'Баннер изменен' }
         format.json { render :show, status: :ok, location: @banner }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class BannersController < ApplicationController
   def destroy
     @banner.destroy
     respond_to do |format|
-      format.html { redirect_to banners_url, notice: 'Banner was successfully destroyed.' }
+      format.html { redirect_to banners_url, notice: 'Баннер удален' }
       format.json { head :no_content }
     end
   end

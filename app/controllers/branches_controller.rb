@@ -1,4 +1,5 @@
 class BranchesController < ApplicationController
+  # before_action :authenticate_user!
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
 
   # GET /branches
@@ -10,6 +11,13 @@ class BranchesController < ApplicationController
   # GET /branches/1
   # GET /branches/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = BranchPdf.new(@branch)
+        send_data pdf.render, filename: "Карточка филиала ТК БСД #{@branch.name}.pdf"
+      end
+    end
   end
 
   def list
@@ -20,6 +28,7 @@ class BranchesController < ApplicationController
   # GET /branches/new
   def new
     @branch = Branch.new
+    @rand_password = gen_password
     @title = "Добавить филиал БСД"
   end
 
@@ -31,10 +40,10 @@ class BranchesController < ApplicationController
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
-
+    @rand_password = ('0'..'z').to_a.shuffle.first(8).join
     respond_to do |format|
       if @branch.save
-        format.html { redirect_to @branch, notice: 'Филиал добавлен' }
+        format.html { redirect_to persons_profile_url, notice: 'Филиал успешно добавлен' }
         format.json { render :show, status: :created, location: @branch }
       else
         format.html { render :new }
@@ -75,6 +84,6 @@ class BranchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def branch_params
-      params.require(:branch).permit(:name, :email, :phone, :description, :background, :organization, :inn, :director, :address, :ogrn, :kpp, :region_kladr_id)
+      params.require(:branch).permit(:name, :email, :phone, :description, :background, :organization, :inn, :director, :address, :ogrn, :kpp, :region_kladr_id, :bank, :bik, :rs, :ks)
     end
 end

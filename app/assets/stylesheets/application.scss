@@ -6,7 +6,7 @@
 @import "jquery.kladr.min";
 @import "loyalty";
 @import "orders";
-
+@import "simple_form.autocomplete";
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
@@ -42,7 +42,10 @@ h1 > a:hover {
 .hide {
   display: none;
 }
-
+.margin-5 {
+  mairgin: 5px;
+  padding: 5px;
+}
 .show {
   display: block;
 }
@@ -141,9 +144,9 @@ h1 > a:hover {
 }
 
 .main-title {
-  	color: #f9f1e9;
+    color: #f9f1e9;
     font-weight: bold;
-  	text-align: left;
+    text-align: left;
     text-shadow: 3px 2px rgba(0, 9, 0, 0.3);
 }
 .input-group-button i {
@@ -152,21 +155,21 @@ h1 > a:hover {
 }
 
 .icon-button {
-	background-color: white;
-	border-radius: 3.6rem;
-	cursor: pointer;
-	display: inline-block;
-	font-size: 2.0rem;
-	height: 3.6rem;
-	line-height: 3.6rem;
-	margin: 0 5px;
-	position: relative;
-	text-align: center;
-	-webkit-user-select: none;
-	   -moz-user-select: none;
-	    -ms-user-select: none;
-	        user-select: none;
-	width: 3.6rem;
+  background-color: white;
+  border-radius: 3.6rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2.0rem;
+  height: 3.6rem;
+  line-height: 3.6rem;
+  margin: 0 5px;
+  position: relative;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 3.6rem;
 }
 
 ul {
@@ -176,13 +179,13 @@ a {
   text-decoration: none
 }
 .generic-anchor {
-	color: #fff;
-	&:visited {
-		color: #fff;
-	}
-	&:hover {
-		color: #ccc;
-	}
+  color: #fff;
+  &:visited {
+    color: #fff;
+  }
+  &:hover {
+    color: #ccc;
+  }
 }
 
 .flex-rw {
@@ -452,4 +455,73 @@ transform: translateY(-30%);
 
 .red-text {
   color: red;
+}
+
+
+
+.alert-callout-subtle {
+  width: 100%;
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border: 0;
+  border-left: 0.3125rem solid #8a8a8a;
+  box-shadow: 0 5px 8px -6px rgba(0, 0, 0, 0.2);
+}
+
+.alert-callout-subtle.success {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #3adb76;
+}
+
+.alert-callout-subtle.alert {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #cc4b37;
+}
+
+.alert-callout-subtle.warning {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #ffae00;
+}
+
+.alert-callout-subtle.primary {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #1779ba;
+}
+
+.alert-callout-subtle.small {
+  font-size: 80%;
+}
+
+.alert-callout-subtle.small .close-button {
+  font-size: 1.5rem;
+}
+
+.alert-callout-subtle.large {
+  font-size: 150%;
+}
+
+.alert-callout-subtle.large .close-button {
+  font-size: 3rem;
+}
+
+.alert-callout-subtle .close-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.alert-callout-subtle.radius {
+  border-radius: 0.6rem;
+}
+
+.pic-icon {
+  width: 2rem;
+  position: relative;
 }

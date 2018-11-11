@@ -1,10 +1,11 @@
 <div class="form-inputs  callout" data-abide="data-abide" novalidate="novalidate">
   <div class="wizard">
+    <div class="callout primary hide" id="form-error"></div>
     <%= simple_form_for(@order) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <fieldset  class="slideLeft active">
+    <fieldset id="order-tab-1" class="slideLeft active">
       <legend>Сведения о грузе</legend>
       <div class="grid-x grid-margin-x">
         <div class="cell small-12 floated-label-wrapper">
@@ -25,12 +26,17 @@
         <div class="cell small-6 auto">
           <%= f.input :oversized, as: :boolean, checked_value: true, unchecked_value: false, label: 'Негабарит' %>
         </div>
+
         <div class="cell small-12 medium-6 floated-label-wrapper">
-          <%= f.input :from_city, as: :string, label: 'Откуда', required: true, :placeholder => "Откуда", input_html: { class:'kladrCity input-kladr'} %>
+          <%= f.input :from_city, as: :string, label: 'Откуда', required: true, :placeholder => "Откуда" %>
+          <%= f.input :kladr_from, :as => :hidden %>
         </div>
+
         <div class="cell small-12 medium-6 floated-label-wrapper">
-          <%= f.input :to_city, as: :string, label: 'Куда', required: true, :placeholder => "Куда", input_html: { class:'kladrCity input-kladr'} %>
+          <%= f.input :to_city, as: :string, label: 'Куда', required: true, :placeholder => "Куда" %>
+          <%= f.input :kladr_to, :as => :hidden %>
         </div>
+
         <div class="cell small-12 medium-4 floated-label-wrapper">
           <%= f.input :dt, as: :string, label: 'Дата исполнения (подачи авто)', required: true, :placeholder => "Дата исполнения (подачи авто)" %>
         </div>
@@ -39,7 +45,7 @@
         </div>
       </div>
     </fieldset>
-    <fieldset class="slideLeft">
+    <fieldset id="order-tab-2" class="slideLeft">
       <legend>Информация об отправителе</legend>
       <div class="grid-x grid-margin-x">
         <div class="cell small-12 floated-label-wrapper">
@@ -52,11 +58,11 @@
           <%= f.input :shipper_phone, label: 'Телефон', required: true, :placeholder => 'Телефон', input_html: { pattern:'number'} %>
         </div>
         <div class="cell small-12 floated-label-wrapper">
-          <%= f.input :shipper_address, :placeholder => 'Адрес' %>
+          <%= f.input :shipper_address, label: 'Адрес забора груза', :placeholder => 'Адрес' %>
         </div>
       </div>
     </fieldset>
-    <fieldset class="slideLeft">
+    <fieldset id="order-tab-3" class="slideLeft">
       <legend>Получатель груза</legend>
       <div class="grid-x grid-margin-x">
         <div class="cell small-12 floated-label-wrapper">
@@ -74,7 +80,7 @@
         </div>
       </div>
     </fieldset>
-    <fieldset class="slideLeft">
+    <fieldset id="order-tab-4" class="slideLeft">
       <legend>Плательщик</legend>
       <div class="grid-x grid-margin-x">
         <div class="cell small-12 medium-6">
@@ -102,25 +108,103 @@
         </div>
       </div>
     </fieldset>
-    <%= f.association :user, :as => :hidden %>
-
     <div class="buttons">
       <a class="button secondary prev left" id="prev">Назад</a>
       <a class="button secondary next right" id="next">Вперед</a>
-
       <%= f.button :submit, "Готово", class: "submit right" %>
     </div>
   <% end %>
 </div>
 </div>
 <script>
-// new_order
 $('#new_order').on('submit', function(){
   // здесь проверяем что хотим, показываем ошибки или return true.
-  var $s = "";
+  if ($("#order_cargo_id").val() == "") {
+    setActiveOrderTab("Вы забыли указать тип груза", 1);
+    $("#order_cargo_id").focus();
+    return false;
+  }
 
-  alert("11");
+  if ($("#order_weight").val() == "") {
+    setActiveOrderTab("Вы не указали вес груза", 1);
+    $("#order_weight").focus();
+    return false;
+  }
+  if ($("#order_weight").hasClass("is-invalid-input")) {
+    setActiveOrderTab("Вы не указали вес груза", 1);
+    $("#order_weight").focus();
+    return false;
+  }
+
+  if ($("#order_volume").val() == "") {
+    setActiveOrderTab("Вы не указали объем груза", 1);
+    $("#order_volume").focus();
+    return false;
+  }
+  if ($("#order_volume").hasClass("is-invalid-input")) {
+    setActiveOrderTab("Вы не указали объем груза", 1);
+    $("#order_volume").focus();
+    return false;
+  }
+
+  if ($("#order_from_city").val() == "") {
+    setActiveOrderTab("Из какого города нужно сделать доставку?", 1);
+    $("#order_from_city").focus();
+    return false;
+  }
+  if ($("#order_to_city").val() == "") {
+    setActiveOrderTab("В какой город доставить Ваш груз?", 1);
+    $("#order_to_city").focus();
+    return false;
+  }
+  if ($("#order_dt").val() == "") {
+    setActiveOrderTab("Когда необходимо выполнить заявку?", 1);
+    $("#order_dt").focus();
+    return false;
+  }
+  if ($("#order_shipper_person").val() == "") {
+    setActiveOrderTab("Вы забыли указать контактное лицо отправителя", 2);
+    $("#order_shipper_person").focus();
+    return false;
+  }
+  if ($("#order_shipper_phone").val() == "") {
+    setActiveOrderTab("Вы не указали номер телефона отправителя", 2);
+    $("#order_shipper_phone").focus();
+    return false;
+  }
+  if ($("#order_consignee_person").val() == "") {
+    setActiveOrderTab("Вы забыли указать контактное лицо получателя", 3);
+    $("#order_consignee_person").focus();
+    return false;
+  }
+  if ($("#order_consignee_phone").val() == "") {
+    setActiveOrderTab("Вы не указали номер телефона получателя", 3);
+    $("#order_consignee_phone").focus();
+    return false;
+  }
+  if ($("#order_email").val() == "") {
+    setActiveOrderTab("Вы забыли указать E-mail для связи с вами", 4);
+    $("#order_email").focus();
+    return false;
+  }
+  if ($("#order_payment_id").val() == "") {
+    setActiveOrderTab("Вы забыли указать способ оплаты", 4);
+    $("#order_payment_id").focus();
+    return false;
+  }
+  this.submit();
 });
+
+function setActiveOrderTab(msg, tabIndex) {
+  $("#form-error").text(msg);
+  $("#form-error").addClass("show");
+  $("#form-error").removeClass("hide");
+  $("#order-tab-1").removeClass('active');
+  $("#order-tab-2").removeClass('active');
+  $("#order-tab-3").removeClass('active');
+  $("#order-tab-4").removeClass('active');
+	$("#order-tab-"+tabIndex).addClass('active');
+};
 
 $('#next').click(function () {
   $('fieldset.active').removeClass('active').next('fieldset').addClass('active');
@@ -133,6 +217,34 @@ $('#prev').click(function () {
 $.datetimepicker.setLocale('ru');
 $('#order_dt').datetimepicker({lang: 'ru', timepicker: false, format: 'd/m/Y', formatDate: 'Y/m/d', minDate: '<%= Date.today + 1 %>'});
 
+$("#order_from_city").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869",
+  type: "ADDRESS",
+  hint: false,
+  bounds: "city",
+  constraints: {
+    label: "",
+    locations: { city_type_full: "город" }
+  },
+  onSelect: function(suggestion) {
+    $("#order_kladr_from").val(suggestion["data"]["region_kladr_id"]);
+  }
+});
+$("#order_to_city").suggestions({
+  token: "f2bbb5624fd5b6295a9207033ca2449935340869",
+  type: "ADDRESS",
+  hint: false,
+  bounds: "city",
+  constraints: {
+    label: "",
+    locations: { city_type_full: "город" }
+  },
+  onSelect: function(suggestion) {
+    $("#order_kladr_to").val(suggestion["data"]["region_kladr_id"]);
+  }
+});
+
+
 $("#order_shipper_address").suggestions({
   token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
   /* Вызывается, когда пользователь выбирает одну из подсказок */
@@ -140,6 +252,7 @@ $("#order_shipper_address").suggestions({
     console.log(suggestion);
   }
 });
+
 $("#order_consignee_address").suggestions({
   token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
   /* Вызывается, когда пользователь выбирает одну из подсказок */
@@ -155,6 +268,7 @@ $("#order_shipper").suggestions({
     console.log(suggestion);
   }
 });
+
 $("#order_consignee").suggestions({
   token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
   /* Вызывается, когда пользователь выбирает одну из подсказок */
@@ -170,6 +284,7 @@ $("#order_shipper_person").suggestions({
     console.log(suggestion);
   }
 });
+
 $("#order_consignee_person").suggestions({
   token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "NAME", count: 5,
   /* Вызывается, когда пользователь выбирает одну из подсказок */
@@ -177,6 +292,7 @@ $("#order_consignee_person").suggestions({
     console.log(suggestion);
   }
 });
+
 $("#order_consignee_address").suggestions({
   token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
   /* Вызывается, когда пользователь выбирает одну из подсказок */
@@ -192,6 +308,7 @@ $('#checkPayer1').click(function () {
 $('#checkPayer2').click(function () {
   $("#payerOrganization").prop('disabled', true);
 });
+
 $('#checkPayer3').click(function () {
   $("#payerOrganization").prop('disabled', false);
 });

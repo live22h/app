@@ -1,0 +1,19 @@
+# Разрешить небезопасные приложения
+# https://myaccount.google.com/lesssecureapps
+
+development:
+  :address: smtp.gmail.com
+  :port: 587
+  :domain: 'localhost:3000'
+  :authentication: plain
+  :user_name: live22h@gmail.com
+  :password: XbnxtWN59wBWzgw6
+  :authentication: plain
+  :enable_starttls_auto: true
+production:
+  :address: smtp.gmail.com
+  :port: 587
+  :authentication: plain
+  :user_name: live22h@gmail.com
+  :password: XbnxtWN59wBWzgw6
+  :enable_starttls_auto: true
