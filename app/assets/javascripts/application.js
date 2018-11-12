@@ -11,13 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require foundation
 //= require rails-ujs
 //= require activestorage
 //= simple_form.autocomplete
 //= require jquery.kladr.min
 //= require jquery.steps.min
-//= require foundation
-//= require_tree .
+//= require jquery.datetimepicker.full.min
+//= require_self
 
 $(function() {
   var showClass = 'show';
