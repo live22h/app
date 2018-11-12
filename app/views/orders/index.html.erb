@@ -6,13 +6,18 @@
   <%= f.text_field :code_eq, required: true, placeholder: "Код заявки" %>
   <%= f.submit "Найти", class: "button" %>
 <% end %>
-<% @orders.each do |order| %>
-  Отправка из:
-  <%= order.from_city %><br>
-  Прибытие в:
-  <%= order.to_city %><br></%>
-Статус заявки:
-<b><%= order.status.name %></b><br>
+
+<% if @orders.empty? %>
+  Заявка с таким номером не существует, пожалуйста, проверьте введенные данные<br>
+<% else %>
+  <% @orders.each do |order| %>
+    Отправка из:
+    <%= order.from_city %><br>
+    Прибытие в:
+    <%= order.to_city %><br></%>
+  Статус заявки:
+  <b><%= order.status.name %></b><br>
+  <% end %>
 <% end %>
 <%= link_to 'Подать заявку на доставку груза', new_order_path %>
 </div>

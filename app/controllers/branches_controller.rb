@@ -1,5 +1,7 @@
 class BranchesController < ApplicationController
+  include ApplicationHelper
   # before_action :authenticate_user!
+
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
 
   # GET /branches

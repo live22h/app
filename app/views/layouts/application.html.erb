@@ -5,31 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title><%= content_for?(:title) ? yield(:title) : "Балтийская служба доставки" %></title>
-
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
-    <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet"/>
-    <!--[if lt IE 10]> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script> <![endif]-->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.8.0/dist/js/jquery.suggestions.min.js"></script>
-    <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div data-closable class="notice callout alert-callout-subtle primary small success">
-      <%= notice %>
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">⊗</span>
-      </button>
-    </div>
-    <div data-closable class="notice callout alert-callout-subtle primary small warning">
-      <%= alert %>
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">⊗</span>
-      </button>
-    </div>
+      <%= render file: 'layouts/notify' %>
 
       <div class="grid-y full" style="height:95%">
         <div class="cell small-1 slideLeft-fast">

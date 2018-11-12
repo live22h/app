@@ -6,10 +6,9 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @title = "Проверить статус заявки"
+    @title = "Отследить груз"
     unless params[:q].blank?
-      params[:q][:code_eq] = params[:q][:code_eq].upcase.gsub(/[СТЕКМНРАВХ]/, 'С'=> 'C','Т'=> 'T','Е'=> 'E','К'=> 'K','М'=> 'M','Н'=> 'H','Р'=> 'P','А'=> 'A','В'=> 'B','Х'=> 'X')
-      puts params[:q][:code_eq]
+      params[:q][:code_eq] = params[:q][:code_eq].upcase.strip.gsub(/[СТЕКМНРАВХ]/, 'С'=> 'C','Т'=> 'T','Е'=> 'E','К'=> 'K','М'=> 'M','Н'=> 'H','Р'=> 'P','А'=> 'A','В'=> 'B','Х'=> 'X')
       @search = Order.search(params[:q])
       @orders = @search.result
     else

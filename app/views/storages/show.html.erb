@@ -24,7 +24,7 @@
 
 <% branch = Branch.find(@storage.branch_id) %>
 
-<p id="notice"><%= notice %></p>
+<%= render file: 'layouts/notify' %>
 
 <div class="grid-x callout grid-margin-x" style="min-height: 350px">
   <div class="cell small-12 medium-6">
