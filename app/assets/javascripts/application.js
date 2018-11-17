@@ -18,35 +18,4 @@
 //= require jquery.steps.min
 //= require_self
 
-$(function() {
-  var showClass = 'show';
-
-  $('input').on('checkval', function() {
-    var label = $(this).prev('label');
-    if (this.value !== '') {
-      label.addClass(showClass);
-    } else {
-      label.removeClass(showClass);
-    }
-  }).on('keyup', function() {
-    $(this).trigger('checkval');
-  });
-
-  $('.kladrCity').kladr({
-    type: $.kladr.type.city
-  });
-
-  $('.input-kladr').on('checkval', function() {
-    var label = $(this).prev('label');
-    if (this.value !== '') {
-      label.addClass(showClass);
-    } else {
-      label.removeClass(showClass);
-    }
-
-  }).on('keyup', function() {
-    $(this).trigger('checkval');
-  });
-});
-
 $(document).foundation();

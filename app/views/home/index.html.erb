@@ -198,57 +198,6 @@
   </div>
 
   <div class="cell small-12 small-order-2 medium-order-2 medium-6 large-order-3 large-3">
-    <form class="callout text-center calc-form" data-abide="data-abide" novalidate="novalidate">
-      <div class="grid-x grid-margin-x">
-        <div class="cell small-12">
-          <h4>Расчет стоимости</h4>
-        </div>
-        <div class="cell small-12">
-          <div class="floated-label-wrapper">
-            <label for="fromCity">Забрать груз в городе:</label>
-            <input id="fromCity" class="kladrCity input-kladr" placeholder="Отправитель" autocomplete="on" data-kladr-type="city" type="text" required="required">
-          </div>
-        </div>
-        <div class="cell small-12">
-          <div class="floated-label-wrapper">
-            <label for="toCity">Доставить в город:</label>
-            <input type="text" id="toCity" class="kladrCity input-kladr" name="full name input" placeholder="Получатель" required="required">
-          </div>
-        </div>
-        <div class="cell small-6">
-          <div class="floated-label-wrapper">
-            <label for="cargoWeight">Вес в, кг:</label>
-            <input type="text" id="cargoWeight" name="cargoWeight" placeholder="Вес" required="required" pattern="number">
-          </div>
-        </div>
-        <div class="cell small-6">
-          <div class="floated-label-wrapper">
-            <label for="cargoVolume">Объем, м<sup>3</sup>:</label>
-            <input type="text" id="cargoVolume" name="cargoVolume" placeholder="Объем" required="required" pattern="number">
-          </div>
-        </div>
-        <div class="cell small-12">
-          <div class="floated-label-wrapper input-group">
-            <div class="input-group">
-              <label for="email">Отправить расчет:</label>
-              <% if user_signed_in? %>
-                <input class="input-group-field" id="email" type="email" placeholder="Введите e-mail" pattern="email" value="<%= current_user.email %>">
-              <% else %>
-                <input class="input-group-field" id="email" type="email" placeholder="Введите e-mail" pattern="email">
-              <% end %>
-              <div class="input-group-button htooltip htooltip-right">
-                <span>Хотите сохранить или поделиться этим расчетом?<br>Отправьте его на электронную почту</span>
-                <input class="button expanded info" style="font-family: FontAwesome; font-size: 1.3rem;" type="submit" value="&#xf14d;">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cell small-12">
-          <a href="<%= new_order_path %>" class="button expanded color27">Оформить перевозку
-            <i class="fa fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </form>
+    <%= render file: 'template/calc' %>
   </div>
 </div>
