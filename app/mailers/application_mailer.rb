@@ -13,4 +13,11 @@ class ApplicationMailer < ActionMailer::Base
     @new_user_password = new_user_password
     mail to: orderuser.email, subject: "Заявка на доставку груза #{order.from_city}-#{order.to_city}"
   end
+
+  def new_branch_admin(branch, user, new_user_password)
+    @branch = branch
+    @user = user
+    @new_user_password = new_user_password
+    mail to: orderuser.email, subject: "Вы назначены администратором филиала #{branch.new}"
+  end
 end

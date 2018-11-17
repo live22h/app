@@ -5,9 +5,9 @@ module ApplicationHelper
   end
 
   def order_code(order)
-    letters = "CTEKMHPABX"
+    letters = 'CTEKMHPABX'
     code_digits = order.payment_id * 100 + Date.today.strftime("%U").to_i
-    counter = (((Order.maximum("id").to_i + 1) % 1000) + 1000).to_s[1,3]
+    counter = (((Order.maximum('id').to_i + 1) % 1000) + 1000).to_s[1, 3]
 
     code = "#{order.kladr_from[0, 2]}#{code_digits}#{order.kladr_to[0, 2]}#{counter}"
 

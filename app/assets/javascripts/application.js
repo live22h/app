@@ -10,11 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
+//= require jquery_ujs
 //= require foundation
-//= require rails-ujs
 //= require activestorage
-//= simple_form.autocomplete
 //= require jquery.kladr.min
 //= require jquery.steps.min
 //= require_self
@@ -50,8 +49,4 @@ $(function() {
   });
 });
 
-
 $(document).foundation();
-$(function() {
-  $(document).foundation();
-});

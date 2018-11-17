@@ -46,12 +46,7 @@ class OrdersController < ApplicationController
     else
       new_user_password = gen_password
       @order.user_id = add_user(@order.person, @order.email, new_user_password)
-
-      puts "---------------------------------"
-      puts "It's new: #{@is_new_user}, #{new_user_password}"
-      new_user_password = (@is_new_user) ? new_user_password : ""
-      puts "It's new: #{@is_new_user}, #{new_user_password}"
-      puts "---------------------------------"
+      new_user_password = (@is_new_user) ? new_user_password : ''
     end
     code = order_code(@order)
     @order.code = code

@@ -1,5 +1,6 @@
 class BranchesController < ApplicationController
   include ApplicationHelper
+  include AdduserHelper
   # before_action :authenticate_user!
 
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
@@ -24,14 +25,13 @@ class BranchesController < ApplicationController
 
   def list
     @branches = Branch.all
-    @title = "Филиалы"
+    @title = 'Филиалы'
   end
 
   # GET /branches/new
   def new
     @branch = Branch.new
-    @rand_password = gen_password
-    @title = "Добавить филиал БСД"
+    @title = 'Добавить филиал БСД'
   end
 
   # GET /branches/1/edit
@@ -42,7 +42,20 @@ class BranchesController < ApplicationController
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
-    @rand_password = ('0'..'z').to_a.shuffle.first(8).join
+
+# -------------------------------------------
+@rand_password = gen_password
+user = User.where(:email => @branch.email)
+
+new_user_password = gen_password
+user_id = add_user(@order.person, @order.email, new_user_password)
+userrole = Userrole.new
+userrole.user_id = user_id
+userrole.role_id = 2
+userrole.save
+@branch.email = ''
+
+
     respond_to do |format|
       if @branch.save
         format.html { redirect_to persons_profile_url, notice: 'Филиал успешно добавлен' }

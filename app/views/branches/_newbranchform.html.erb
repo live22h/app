@@ -5,49 +5,47 @@
 
   <div class="form-inputs callout">
     <div class="grid-x grid-margin-x">
-      <div class="cell small-12 floated-label-wrapper">
-        <%= f.input :name, label: 'Краткое наименование (внутренне обозначение)', as: :string, :placeholder => "Краткое наименование (внутренне обозначение)" %>
+      <div class="cell small-12 medium-6">
+        <div class="grid-x">
+          <div class="cell small-12 floated-label-wrapper"><%= f.input :name, label: 'Краткое наименование (внутренне обозначение)', as: :string, :placeholder => "Краткое наименование (внутренне обозначение)" %></div>
+          <div class="cell small-12 floated-label-wrapper"><%= f.input :email, label: 'Email администратора', as: :string, :placeholder => "Email администратора" %></div>
+          <div><p class="small-text-size red-text">Будьте внимательны при вводе адреса электронного ящика</p></div>
+        </div>
       </div>
-      <div class="cell small-12 floated-label-wrapper">
-        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => "Email администратора" %>
-      </div>
-      <div class="cell small-12 floated-label-wrapper">
-        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => "Email администратора" %>
-      </div>
-      <div class="cell small-12 floated-label-wrapper">
-        <%= f.input :email, label: 'Email администратора', as: :string, :placeholder => @rand_password %>
+      <div class="small-12 medium-6">
+        <p>Введите название нового филиала и e-mail администратора. Если пользователь с указаным почтовым ящиком не зарегистрирован, то будет создан новый пользователь и пароль. Инструкции по дальнейшим действиям будут отправлены пользователю на электронный
+          почтовый ящик</p>
       </div>
     </div>
-
     <div class="form-actions">
       <%= f.button :submit, 'OK' %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <script>
-$("#branch_organization").suggestions({
-  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
-  /* Вызывается, когда пользователь выбирает одну из подсказок */
-  onSelect: function (suggestion) {
-    console.log(suggestion);
-    $("#branch_ogrn").val(suggestion["data"]["ogrn"]);
-    $("#branch_inn").val(suggestion["data"]["inn"]);
-    $("#branch_kpp").val(suggestion["data"]["kpp"]);
-    $("#branch_address").val(suggestion["data"]["address"]["unrestricted_value"]);
-    $("#branch_region_kladr_id").val(suggestion["data"]["address"]["data"]["region_kladr_id"]);
+  $("#branch_organization").suggestions({
+    token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "PARTY", count: 5,
+    /* Вызывается, когда пользователь выбирает одну из подсказок */
+    onSelect: function (suggestion) {
+      console.log(suggestion);
+      $("#branch_ogrn").val(suggestion["data"]["ogrn"]);
+      $("#branch_inn").val(suggestion["data"]["inn"]);
+      $("#branch_kpp").val(suggestion["data"]["kpp"]);
+      $("#branch_address").val(suggestion["data"]["address"]["unrestricted_value"]);
+      $("#branch_region_kladr_id").val(suggestion["data"]["address"]["data"]["region_kladr_id"]);
 
-    $("#branch_director").val(suggestion["data"]['management']['name']);
-  }
-});
+      $("#branch_director").val(suggestion["data"]['management']['name']);
+    }
+  });
 
-$("#branch_address").suggestions({
-  token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
-  /* Вызывается, когда пользователь выбирает одну из подсказок */
-  onSelect: function (suggestion) {
-    $("#branch_region_kladr_id").val(suggestion["data"]["region_kladr_id"]);
-  }
-});
+  $("#branch_address").suggestions({
+    token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5,
+    /* Вызывается, когда пользователь выбирает одну из подсказок */
+    onSelect: function (suggestion) {
+      $("#branch_region_kladr_id").val(suggestion["data"]["region_kladr_id"]);
+    }
+  });
 
   var showClass = 'show';
 
