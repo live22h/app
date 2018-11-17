@@ -16,9 +16,6 @@
 //= require activestorage
 //= require jquery.kladr.min
 //= require jquery.steps.min
-
-
-
 //= require_self
 
 $(function() {

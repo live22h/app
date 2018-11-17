@@ -1,12 +1,11 @@
 @import "foundation_and_overrides";
+@import "jquery.datetimepicker";
+@import "jquery.kladr.min";
 @import "font-awesome";
 @import "home";
 @import "about";
-@import "jquery.datetimepicker.css";
-@import "jquery.kladr.min";
 @import "loyalty";
 @import "orders";
-@import "simple_form.autocomplete";
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
