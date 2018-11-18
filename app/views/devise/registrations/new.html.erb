@@ -15,20 +15,20 @@
             <%= f.input :family, label: 'Фамилия', required: true, placeholder: "Фамилия", error: 'Вы не указали фамилию' %>
           </div>
           <div class="cell small-12 medium-4 floated-label-wrapper">
-            <%= f.input :name, label: 'Имя', required: true, error: 'Обязательно для заполнения', placeholder: "Имя", error: 'Вы забыли представиться' %>
+            <%= f.input :name, label: 'Имя', required: true, placeholder: "Имя", error: 'Вы забыли представиться' %>
           </div>
           <div class="cell small-12 medium-4 floated-label-wrapper">
             <%= f.input :otch, placeholder: "Отчество", label: 'Отчество' %>
           </div>
           <div class="cell small-12 medium-8 floated-label-wrapper">
-            <%= f.input :address, label: 'Адрес', placeholder: "Адрес", error: 'Обязательно для заполнения', required: true, error: '' %>
+            <%= f.input :address, label: 'Адрес', placeholder: "Адрес", required: true, error: '' %>
             <%= f.input :region_kladr_id, :as => :hidden, required: true, error: '' %>
           </div>
           <div class="cell small-12 medium-4 floated-label-wrapper">
             <%= f.input :born, as: :string, placeholder: "Дата рождения", error: 'Обязательно для заполнения', required: true, label: "Дата рождения" %>
           </div>
           <div class="cell small-12 medium-6 floated-label-wrapper">
-            <%= f.input :phone, label: 'Телефон', placeholder: "Телефон", error: 'Обязательно для заполнения', required: true, error: 'Вы забыли ввести номер телефона', input_html: { maxlength: 12 }  %>
+            <%= f.input :phone, label: 'Телефон', placeholder: "Телефон", required: true, error: 'Вы забыли ввести номер телефона', input_html: { maxlength: 12 }  %>
           </div>
           <div class="cell small-12 medium-6 floated-label-wrapper">
             <%= f.input :email, required: true, autofocus: true, placeholder: "E-mail", error: 'Обязательно для заполнения', label: 'E-mail' %>
@@ -37,10 +37,10 @@
             <%= f.input :password, required: true, label:"Пароль", placeholder: "Пароль", hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length) %>
           </div>
           <div class="cell small-12 medium-6 floated-label-wrapper">
-            <%= f.input :password_confirmation, required: true, placeholder: "Подтвердите пароль", error: 'Обязательно для заполнения', label: "Подтвердите пароль", error: 'Подтвердите свой пароль' %>
+            <%= f.input :password_confirmation, required: true, placeholder: "Подтвердите пароль", label: "Подтвердите пароль", error: 'Подтвердите свой пароль' %>
           </div>
           <div class="cell small-12">
-              <%= f.input :privacy, as: :boolean, boolean_style: :inline, required: true, error: 'Обязательно для заполнения', label: 'Даю согласие на обработку персональных данных', error: 'Подтвердите свое согласие на регистрацию' %>
+              <%= f.input :privacy, as: :boolean, boolean_style: :inline, required: true, label: 'Даю согласие на обработку персональных данных', error: 'Подтвердите свое согласие на регистрацию' %>
               <a href="<%= privacy_path %>">Подробнее о персональных данных</a>
           </div>
           <div class="cell small-12">
@@ -59,7 +59,7 @@
 <script>
   $("#user_born").mask("00/00/0000", {placeholder: "00/00/0000"}, {clearIfNotMatch: true});
   $("#user_phone").mask("8(000)000-00-00", {clearIfNotMatch: true});
-  
+
   $.datetimepicker.setLocale('ru');
   $('#user_born').datetimepicker({lang: 'ru', timepicker: false, format: 'd/m/Y', formatDate: 'Y/m/d', startDate: '<%= Date.today - 17.years %>', maxDate: '<%= Date.today - 17.years %>'});
   $("#user_address").suggestions({token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5, onSelect: function (suggestion) {

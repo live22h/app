@@ -5,5 +5,7 @@ class PersonsController < ApplicationController
 
     @user_orders = Order.where(user_id: current_user.id)
     @roles = current_user.roles
+
+    puts current_user.admin? ? "Да":"Нет"
   end
 end

@@ -12,4 +12,14 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def admin?
+    !roles.find_by_id(1).nil?
+  end
+  def director?
+    !roles.find_by_id(1).nil?
+  end
+  def manager?
+    !roles.find_by_id(2).nil?
+  end
 end

@@ -1,0 +1,14 @@
+<div class="orbit" id="main-banner" role="region" aria-label="Балтийская служба доставки" data-orbit="data-orbit" data-use-m-u-i="false" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out; data-bullets:false; data-auto-play:true; data-timer-delay:1000; data-infinite-wrap:true;">
+  <div class="orbit-wrapper">
+    <ul class="orbit-container">
+      <% @banners.each do |banner| %>
+        <li class="orbit-slide">
+          <figure class="orbit-figure">
+            <%= image_tag(banner.picture.url, class: 'orbit-image') if banner.picture? %>
+            <figcaption class="orbit-caption"><%= banner.description %></figcaption>
+          </figure>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

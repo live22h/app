@@ -42,20 +42,6 @@ class BranchesController < ApplicationController
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
-
-# -------------------------------------------
-@rand_password = gen_password
-user = User.where(:email => @branch.email)
-
-new_user_password = gen_password
-user_id = add_user(@order.person, @order.email, new_user_password)
-userrole = Userrole.new
-userrole.user_id = user_id
-userrole.role_id = 2
-userrole.save
-@branch.email = ''
-
-
     respond_to do |format|
       if @branch.save
         format.html { redirect_to persons_profile_url, notice: 'Филиал успешно добавлен' }

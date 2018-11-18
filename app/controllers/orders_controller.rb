@@ -28,6 +28,10 @@ class OrdersController < ApplicationController
     @title = 'Заявка на забор груза'
   end
 
+  def copy
+    @title = 'Повтор заявки'
+  end
+
   # GET /orders/1/edit
   def edit
     @title = 'Редактировать заявку'

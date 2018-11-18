@@ -1,4 +1,8 @@
 <div class="cell small-12 medium-3"><%= @order.dt %></div>
 <div class="cell small-12 medium-4"><%= "#{@order.from_city} - #{@order.to_city}" %></div>
 <div class="cell small-12 medium-2"><%= "#{@order.weight}/#{@order.volume}" %></div>
-<div class="cell small-12 medium-3"><i class="button fa fa-copy success margin-5"></i><i class="button fa fa-edit margin-5"></i><i class="button fa fa-trash alert margin-5"></i><i class="button fa fa-briefcase margin-5"></i></div>
+<div class="cell small-12 medium-3">
+  <a href="<%= link_to @order %>"><i class="button fa fa-copy success margin-5"></i></a>
+  <i class="button fa fa-trash alert margin-5"></i>
+  <i class="button fa fa-briefcase margin-5"></i>
+</div>

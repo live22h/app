@@ -1,7 +1,21 @@
-<div class="cell small-12">
-  <details>
-    <summary>Администратор</summary>
-    <a href="<%= new_branch_path %>">Добавить филиал</a>
-    <a href=""></a>
-  </details>
+<ul class="tabs" data-active-collapse="true" data-tabs id="admin-tabs">
+  <li class="tabs-title is-active"><a href="#panel1c" aria-selected="true">Филиалы</a></li>
+  <li class="tabs-title"><a href="#panel2c">Tab 2</a></li>
+  <li class="tabs-title"><a href="#panel3c">Tab 3</a></li>
+  <li class="tabs-title"><a href="#panel4c">Tab 4</a></li>
+</ul>
+
+<div class="tabs-content" data-tabs-content="admin-tabs">
+  <div class="tabs-panel is-active" id="panel1c">
+    <p><a href="<%= new_branch_path %>">Добавить филиал</a></p>
+  </div>
+  <div class="tabs-panel" id="panel2c">
+    <p>11</p>
+  </div>
+  <div class="tabs-panel" id="panel3c">
+    22
+  </div>
+  <div class="tabs-panel" id="panel4c">
+    <p>33</p>
+  </div>
 </div>

@@ -17,6 +17,13 @@
 //= require jquery.kladr.min
 //= require jquery.steps.min
 //= require jquery.mask.min
+//= require metro-theme-ui
 //= require_self
 
-$(document).foundation();
+$(function(){ $(document).foundation(); });
+
+$(document).ready(function(){
+  $('.slider').slick({
+      autoplay: true
+  });
+});

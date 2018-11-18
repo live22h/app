@@ -1,15 +1,12 @@
 <div class="grid-x callout grid-margin-x">
   <div class="cell small-12 medium-8 small-order-2 medium-order-1">
+    <%= if current_user.admin? then render 'admin' end %>
+    <%= if current_user.director? then render 'director' end %>
+    <%= if current_user.manager? then render 'manager' end %>
 
-    <% @roles.each do |role| %>
-      <%= if role.id == 1 then render 'admin' end %>
-      <%= if role.id == 2 then render 'director' end %>
-      <%= if role.id == 3 then render 'manager' end %>
-    <% end %>
     <hr><br>
       <div class="cell small-12">
-          <h5>Архив заявок</h5>
-<hr>
+          <h5>Архив заявок</h5><hr>
       <div class="grid-x">
         <div class="cell small-12 medium-3 show-for-media">
           Дата
@@ -29,8 +26,7 @@
   </div>
   <div class="cell small-12 medium-4 small-order-1 medium-order-2 list-group">
     <span class="list-group-item"><i class="fa fa-copy fa-fw" aria-hidden="true"></i>&nbsp; Скопировать и внести изменения</span><br>
-    <span class="list-group-item"><i class="fa fa-edit fa-fw" aria-hidden="true"></i>&nbsp; Внести изменения</span><br>
-    <span class="list-group-item"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>&nbsp; Платежные документы</span><br>
     <span class="list-group-item"><i class="fa fa-trash fa-fw" aria-hidden="true"></i>&nbsp; Удалить из архива</span>
+    <span class="list-group-item"><i class="fa fa-briefcase fa-fw" aria-hidden="true"></i>&nbsp; Платежные документы</span><br>
   </div>
 </div>
