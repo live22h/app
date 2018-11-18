@@ -12,7 +12,7 @@
       воспользуйтесь поиском по коду заявки <b><%= @order.code %></b><br>
       Или пройдите по ссылке <a href="http://localhost:3000/orders?q[code_eq]=<%= @order.code %>">http://localhost:3000/orders?q[code_eq]=<%= @order.code %></a>
     </p>
-    <p>Не забудьте оформить доверенноть на получение груза, пройдите по ссылке, чтобы скачать бланк доверенности <a href="http://tk-bsd.com/document/doverennost.docx">Доверенность</a></p>
+    <p>Не забудьте оформить доверенноть на получение груза,<br>пройдите по ссылке, чтобы скачать бланк <a href="http://tk-bsd.com/document/doverennost.docx">Доверенность</a></p>
   <% if @new_user_password.length != 0 %>
     <p>Мы создали для Вас учетную запись на нашем сайте<br>
       Для входа в личный кабинет, воспользуйтесь паролем <b><%= @new_user_password %></b>, логин <b><%= "#{@orderuser.email}" %></b>

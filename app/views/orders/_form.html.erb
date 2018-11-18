@@ -119,8 +119,14 @@
 <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.10.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.10.1/dist/js/jquery.suggestions.min.js"></script>
 <%= render file: 'layouts/datepicker' %>
-
 <script>
+$("#order_weight").mask("#0000");
+$("#order_volume").mask("99,00", {placeholder: ""});
+$("#order_amount").mask("#000", {placeholder: ""});
+$("#order_dt").mask("00/00/0000", {placeholder: "00/00/0000"}, {clearIfNotMatch: true});
+$("#order_shipper_phone").mask("8(000)000-00-00", {clearIfNotMatch: true});
+$("#order_consignee_phone").mask("8(000)000-00-00", {clearIfNotMatch: true});
+
 $('#new_order').on('submit', function(){
   // здесь проверяем что хотим, показываем ошибки или return true.
   if ($("#order_cargo_id").val() == "") {
@@ -134,18 +140,8 @@ $('#new_order').on('submit', function(){
     $("#order_weight").focus();
     return false;
   }
-  if ($("#order_weight").hasClass("is-invalid-input")) {
-    setActiveOrderTab("Вы не указали вес груза", 1);
-    $("#order_weight").focus();
-    return false;
-  }
 
   if ($("#order_volume").val() == "") {
-    setActiveOrderTab("Вы не указали объем груза", 1);
-    $("#order_volume").focus();
-    return false;
-  }
-  if ($("#order_volume").hasClass("is-invalid-input")) {
     setActiveOrderTab("Вы не указали объем груза", 1);
     $("#order_volume").focus();
     return false;

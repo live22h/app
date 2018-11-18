@@ -57,6 +57,9 @@
 <%= render file: 'layouts/datepicker' %>
 
 <script>
+  $("#user_born").mask("00/00/0000", {placeholder: "00/00/0000"}, {clearIfNotMatch: true});
+  $("#user_phone").mask("8(000)000-00-00", {clearIfNotMatch: true});
+  
   $.datetimepicker.setLocale('ru');
   $('#user_born').datetimepicker({lang: 'ru', timepicker: false, format: 'd/m/Y', formatDate: 'Y/m/d', startDate: '<%= Date.today - 17.years %>', maxDate: '<%= Date.today - 17.years %>'});
   $("#user_address").suggestions({token: "f2bbb5624fd5b6295a9207033ca2449935340869", type: "ADDRESS", count: 5, onSelect: function (suggestion) {
