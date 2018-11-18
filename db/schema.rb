@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_10_213158) do
+ActiveRecord::Schema.define(version: 2018_11_18_103514) do
 
   create_table "banners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "picture"
@@ -125,10 +125,32 @@ ActiveRecord::Schema.define(version: 2018_11_10_213158) do
     t.integer "branch_id"
   end
 
+  create_table "prices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "from_city_id"
+    t.bigint "to_city_id"
+    t.float "category"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_city_id"], name: "index_prices_on_from_city_id"
+    t.index ["to_city_id"], name: "index_prices_on_to_city_id"
+  end
+
   create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "kladr_from", limit: 13
+    t.string "kladr_to", limit: 13
+    t.float "category"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kladr_from"], name: "index_routes_on_kladr_from"
+    t.index ["kladr_to"], name: "index_routes_on_kladr_to"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -177,7 +199,7 @@ ActiveRecord::Schema.define(version: 2018_11_10_213158) do
     t.string "name", limit: 20
     t.string "family", limit: 20
     t.date "born"
-    t.string "phone", limit: 12
+    t.string "phone", limit: 15
     t.string "otch", limit: 20
     t.boolean "privacy"
     t.string "address", limit: 150
