@@ -16,6 +16,7 @@
 //= require activestorage
 //= require jquery.kladr.min
 //= require jquery.steps.min
+//= require jquery.mask.min
 //= require_self
 
 $(document).foundation();
