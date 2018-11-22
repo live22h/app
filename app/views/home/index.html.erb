@@ -9,13 +9,12 @@
                 <a href="<%= about_path %>">
                   <div class="xcard xcrard-large color4">
                     <div class="metro-theme-ui">
-                    	<div class="metro-ui-row">
+                      <div class="metro-ui-row">
                         <div class="metro-ui-col-10">
-                  					<div class="metro-ui-column" data-switch="true" data-switches='[{"image": "<%= image_url("logo-white.svg") %>", "content": ""}, { "image": "<%= image_url("red-bg.svg") %>", "content": "<h3>Республика Крым</h3><h5>Cнижаем стоимость 15%</h5>"}]'></div>
+                          <div class="metro-ui-column" data-switch="true" data-switches='[{"image": "<%= image_url("logo-white.svg") %>", "content": "<%= @nearbranch %>"}, { "image": "<%= image_url("red-bg.svg") %>", "content": "<h3>Республика Крым</h3><h5>Cнижаем стоимость 15%</h5>"}]'></div>
                         </div>
-                    	</div>
+                      </div>
                     </div>
-
                   </div>
                 </a>
               </div>
@@ -26,16 +25,11 @@
               <div class="cell small-12">
                 <div class='box'>
                   <div class='content'>
-                    <div class='box'>
-                      <div class='content'>
-                        <a href="<%= branch_list_path %>">
-                          <div class="xcard xcrard-medium color1">
-                            <%= inline_svg "location.svg", class: 'medium-icon' %>
-                            <p id="user-city" style="display:none">Ближайший офис</p>
-                          </div>
-                        </a>
+                    <a href="<%= branch_list_path %>">
+                      <div class="xcard xcrard-medium color1">
+                        <%= inline_svg "location.svg", class: 'medium-icon' %>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
 
@@ -44,9 +38,9 @@
                 <div class='box'>
                   <div class='content'>
                     <a href="<%= orders_path %>">
-                    <div class="xcard xcrard-medium color2">
-                      <%= inline_svg "search.svg", class: 'medium-icon' %>
-                    </div>
+                      <div class="xcard xcrard-medium color17">
+                        <%= inline_svg "search.svg", class: 'medium-icon' %>
+                      </div>
                     </a>
                   </div>
                 </div>
@@ -61,7 +55,7 @@
             <div class='box'>
               <div class='content'>
                 <a href="<%= user_signed_in? ? persons_profile_path : new_user_session_path %>">
-                  <div class="xcard xcrard-medium color27">
+                  <div class="xcard xcrard-medium color16">
                     <%= inline_svg "user.svg", class: 'medium-icon' %>
                   </div>
                 </a>
@@ -143,7 +137,7 @@
             <div class='rect'>
               <div class='content'>
                 <div class="xcard xcrard-medium color-case">
-<%= render file: 'template/minibanner' %>
+                  <%= render file: 'template/minibanner' %>
                 </div>
               </div>
             </div>

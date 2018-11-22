@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_103514) do
+ActiveRecord::Schema.define(version: 2018_11_22_133144) do
 
   create_table "banners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "picture"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 2018_11_18_103514) do
     t.datetime "updated_at", null: false
     t.bigint "branch_id"
     t.index ["branch_id"], name: "index_banners_on_branch_id"
+  end
+
+  create_table "branchadmins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "branch_id"
+    t.bigint "user_id"
+    t.index ["branch_id"], name: "index_branchadmins_on_branch_id"
+    t.index ["user_id"], name: "index_branchadmins_on_user_id"
   end
 
   create_table "branchdirectors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -70,6 +77,23 @@ ActiveRecord::Schema.define(version: 2018_11_18_103514) do
   create_table "coins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "coin", default: 100
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "newslines", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image"
+    t.string "content", limit: 150
+    t.integer "position", default: 1
+    t.bigint "branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_newslines_on_branch_id"
+  end
+
+  create_table "options", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

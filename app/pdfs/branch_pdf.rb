@@ -19,7 +19,8 @@ class BranchPdf < Prawn::Document
     move_down(5)
     text "Банковские реквизиты", size: 18
     move_down(5)
-    text "БИК: #{branch.bik}, #{branch.bank}", size: 14
+    text "БИК: #{branch.bik}", size: 14
+    text "#{branch.bank}", size: 14
     move_down(5)
     text "Р/с: #{branch.rs}", size: 14
     move_down(5)
@@ -28,7 +29,8 @@ class BranchPdf < Prawn::Document
     text "Руководитель: #{branch.director}", size: 14
     move_down(15)
     text "Контакты:", size: 18
-    text "Тел: #{branch.phone}, E-mail: #{branch.email}"
+    text "Тел: #{branch.phone}"
+    text "E-mail: #{branch.email}"
     move_down(5)
 
     text "Адреса терминалов:", size: 18

@@ -1,24 +1,11 @@
 <p id="notice"><%= notice %></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="grid-x">
     <% @branches.each do |branch| %>
-      <tr>
-        <td><%= branch.name %></td>
-        <td><%= link_to 'Show', branch %></td>
-        <td><%= link_to 'Edit', edit_branch_path(branch) %></td>
-        <td><%= link_to 'Destroy', branch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="cell small-12 medium-6"><%= branch.name %></div>
+      <div class="cell small-12 medium-2"><%= link_to 'Показать', branch %></div>
+      <div class="cell small-12 medium-2"><%= link_to 'Изменить', edit_branch_path(branch) %></div>
+      <% if current_user.admin? %>
+        <div class="cell small-12 medium-2"><%= link_to 'Удалить', branch, method: :delete, data: { confirm: 'Вы уверены?' } %></div>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Branch', new_branch_path %>
+</div>

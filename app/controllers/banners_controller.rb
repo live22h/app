@@ -9,16 +9,18 @@ class BannersController < ApplicationController
 
   # GET /banners/1
   # GET /banners/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /banners/new
   def new
     @banner = Banner.new
+    @title = 'Добавить баннер'
   end
 
   # GET /banners/1/edit
   def edit
+    @title ='Изменить баннер'
   end
 
   # POST /banners
@@ -28,7 +30,7 @@ class BannersController < ApplicationController
 
     respond_to do |format|
       if @banner.save
-        format.html { redirect_to @banner, notice: 'Баннер создан' }
+        format.html { redirect_to persons_profile_url, notice: 'Баннер создан' }
         format.json { render :show, status: :created, location: @banner }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class BannersController < ApplicationController
   def update
     respond_to do |format|
       if @banner.update(banner_params)
-        format.html { redirect_to @banner, notice: 'Баннер изменен' }
+        format.html { redirect_to persons_profile_url, notice: 'Баннер изменен' }
         format.json { render :show, status: :ok, location: @banner }
       else
         format.html { render :edit }

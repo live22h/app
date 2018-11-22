@@ -1,16 +1,36 @@
+<%= render file: 'layouts/notify' %>
 
-<%= simple_form_for(@banner) do |f| %>
+<div class="callout">
+  <%= simple_form_for(@banner, html: {multipart: true}) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :branch %>
-    <%= f.input :picture %>
-    <%= f.input :description %>
-    <%= f.input :uri %>
+    <%= f.association :branch, label: 'Филиал' %>
+
+    <div class="preview-box"><img id = 'preview' alt = 'Нет изображения' src="<%= banner.picture_url if banner.picture?%>") %></div>
+    <%= f.file_field :picture, label: 'Изображение' %>
+    <%= f.input :description, label: 'Текст' %>
+    <%= f.input :uri, label: 'Ссылка' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'OK' %>
   </div>
 <% end %>
+</div>
+
+<script type="text/javascript">
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#preview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#banner_picture").change(function(){
+  readURL(this);
+});
+</script>

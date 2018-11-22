@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :branchdirectors
+  resources :options
+  resources :newslines
   resources :orders
   get 'bsd-banner', to: 'bannerpartner#index'
   get '/privacy', to: 'infopersonal#index'

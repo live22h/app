@@ -1,4 +1,6 @@
 class BranchesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :update]
+
   include ApplicationHelper
   include AdduserHelper
   # before_action :authenticate_user!
@@ -14,6 +16,7 @@ class BranchesController < ApplicationController
   # GET /branches/1
   # GET /branches/1.json
   def show
+    @title = @branch.name
     respond_to do |format|
       format.html
       format.pdf do
@@ -36,16 +39,24 @@ class BranchesController < ApplicationController
 
   # GET /branches/1/edit
   def edit
+    @title = 'Изменить данные о филиале'
   end
 
   # POST /branches
   # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
+
+    new_user_password = add_user_by_email(@branch.email)
+    user = User.where(email: @branch.email).first
+
     respond_to do |format|
       if @branch.save
+        user.roles << Role.find_by_id(2) # назначить директором
+        user.branches << @branch
         format.html { redirect_to persons_profile_url, notice: 'Филиал успешно добавлен' }
         format.json { render :show, status: :created, location: @branch }
+        ApplicationMailer.new_branch_admin(@branch, new_user_password).deliver
       else
         format.html { render :new }
         format.json { render json: @branch.errors, status: :unprocessable_entity }
@@ -72,7 +83,7 @@ class BranchesController < ApplicationController
   def destroy
     @branch.destroy
     respond_to do |format|
-      format.html { redirect_to branches_url, notice: 'Сведения о филиале удалены.' }
+      format.html { redirect_to persons_profile_url(anchor: 'panel1c'), notice: 'Сведения о филиале удалены.' }
       format.json { head :no_content }
     end
   end

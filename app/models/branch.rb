@@ -3,6 +3,6 @@ class Branch < ApplicationRecord
   mount_uploader :background, ImageUploader
   has_many :banners
 
-  has_many :branchdirectors
-  has_many :users, through: :branchdirectors
+  has_many :users, through: :branchadmins
+  has_many :newslines
 end

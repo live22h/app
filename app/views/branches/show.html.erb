@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @branch.name %>
-</p>
+<div class="grid-x grid-margin-x callout">
+  <div class="cell small-12 medium-6">
 
-<%= link_to 'Edit', edit_branch_path(@branch) %> |
-<%= link_to 'Back', branches_path %>
+  <%= image_tag(@branch.background.url) if @branch.background? %>
+</div>
+    <div class="cell small-12 medium-6">
+      <p>
+        <strong>Юр. адрес: </strong><%= @branch.address %><br>
+        <strong>Телефон: </strong><%= tel_to @branch.phone %><br>
+        <strong>E-mail: </strong><%= mail_to @branch.email %><br>
+        <%= link_to "Реквизиты филиала (PDF)", branch_path(@branch, :pdf) %>
+      </p>
+      <strong>О филиале:</strong>
+      <p>
+        <%= @branch.description %>
+      </p>
+</div>

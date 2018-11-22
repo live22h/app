@@ -1,4 +1,6 @@
 module AdduserHelper
+  include ApplicationHelper
+
   def add_user(name, email, passwd)
     if User.exists?(email: email)
       User.where(email: email).take.id
@@ -17,4 +19,19 @@ module AdduserHelper
       user.id
     end
   end
+
+  def add_user_by_email(email)
+    passwd = gen_password
+    if User.exists?(email: email)
+      passwd = ''
+    else
+      user = User.create(:email => email,
+                         :password => passwd,
+                         :password_confirmation => passwd)
+      user.save
+      user.id
+    end
+    return passwd
+  end
+
 end

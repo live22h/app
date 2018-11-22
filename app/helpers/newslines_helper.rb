@@ -1,0 +1,2 @@
+module NewslinesHelper
+end

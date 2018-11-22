@@ -1,31 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Banners</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Picture</th>
-      <th>Description</th>
-      <th>Uri</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<a href="<%= new_banner_path %>" class="button">Добавить баннер</a>
+<div class="grid-x">
+  <div class="cell small-12 medium-3">Изображение</div>
+  <div class="cell small-12 medium-3">Текст</div>
+  <div class="cell small-12 medium-3">Ссылка</div>
+  <div class="cell small-12 medium-3"></div>
     <% @banners.each do |banner| %>
-      <tr>
-        <td><%= banner.picture %></td>
-        <td><%= banner.description %></td>
-        <td><%= banner.uri %></td>
-        <td><%= link_to 'Show', banner %></td>
-        <td><%= link_to 'Edit', edit_banner_path(banner) %></td>
-        <td><%= link_to 'Destroy', banner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="cell small-12 medium-3"><div class="preview-box"><%= image_tag(banner.picture_url) if banner.picture? %></div></div>
+      <div class="cell small-12 medium-3"><%= banner.description %></div>
+      <div class="cell small-12 medium-3"><%= banner.uri %></div>
+      <div class="cell small-12 medium-3">
+        <%= link_to 'Изменить', edit_banner_path(banner) %>
+        <%= link_to 'Удалить', banner, method: :delete, data: { confirm: 'Are you sure?' } %></div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Banner', new_banner_path %>
+</div>

@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -67,7 +67,7 @@
        y="73.623283" />
     <g
        id="g956"
-       transform="translate(4.7056144,-10.44249)"
+       transform="translate(4.7056144,-18.909162)"
        style="fill:#ffffff">
       <g
          style="fill:#ffffff"

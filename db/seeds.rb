@@ -43,6 +43,13 @@ Status.create(name: 'Груз выдан')
 Status.create(name: 'Заявка закрыта')
 Status.create(name: 'Заявка отклонена')
 
+Option.create(name: 'Одноклассники', value: '')
+Option.create(name: 'ВКонтакте', value: 'https://vk.com/bsdtrans')
+Option.create(name: 'Инстаграм', value: '')
+Option.create(name: 'Youtube', value: '')
+Option.create(name: 'Заголовок сайта', value: 'Балтийская служба доставки')
+Option.create(name: 'Главный заголовок', value: 'Грузоперевозки по России от 1 кг')
+
 roles = Role.create([{name: 'Администратор сайта'}, {name: 'Администратор филиала'}, {name:'Менеджер филиала'}])
 admin = User.create(:name => "Admin",
                     :email => "admin@tee.su",

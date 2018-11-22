@@ -17,17 +17,19 @@ class StoragesController < ApplicationController
   # GET /storages/new
   def new
     @storage = Storage.new
-    @title = 'Добавить склад филиала'
+    @title = 'Добавить терминал'
   end
 
   # GET /storages/1/edit
   def edit
+    @title = 'Изменить адрес терминала'
   end
 
   # POST /storages
   # POST /storages.json
   def create
     @storage = Storage.new(storage_params)
+    @title = 'Добавить терминал'
 
     respond_to do |format|
       if @storage.save

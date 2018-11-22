@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  
+
   # geocode_ip_address
   # def geokit
   #   @location = session[:geo_location]  # @location is a GeoLoc instance.

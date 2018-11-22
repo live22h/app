@@ -4,35 +4,12 @@
     <span aria-hidden="true">⊗</span>
   </button>
 </div>
-
-<h1>Storages</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Branch</th>
-      <th>Address</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @storages.each do |storage| %>
-      <tr>
-        <td><%= storage.branch_id %></td>
-        <td><%= storage.address %></td>
-        <td><%= storage.latitude %></td>
-        <td><%= storage.longitude %></td>
-        <td><%= link_to 'Show', storage %></td>
-        <td><%= link_to 'Edit', edit_storage_path(storage) %></td>
-        <td><%= link_to 'Destroy', storage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Storage', new_storage_path %>
+<a href="<%= new_storage_path %>" class="button">Добавить терминал</a>
+<div class="grid-x">
+  <% @storages.each do |storage| %>
+    <div class="cell small-12 medium-6"><%= storage.address %></div>
+    <div class="cell small-4 medium-2"><%= link_to 'Показать', storage %></div>
+    <div class="cell small-4 medium-2"><%= link_to 'Изменить', edit_storage_path(storage) %></div>
+    <div class="cell small-4 medium-2"><%= link_to 'Удалить', storage, method: :delete, data: { confirm: 'Вы уверены?' } %></div>
+  <% end %>
+</div>

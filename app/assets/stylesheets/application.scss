@@ -21,6 +21,7 @@ body {
     background-repeat: no-repeat;
     background-color: rgb(21, 48, 68);
 }
+
 h1 > a {
   color: #eee;
   -ms-user-select: none;
@@ -485,9 +486,8 @@ transform: translateY(-30%);
   color: #fff;
   text-align: center;
 }
-input {
-  display: none;
-}
+
+
 .tab {
   position: absolute;
   width: 80px;
@@ -560,3 +560,16 @@ input {
 #tab-bottom:checked ~ .cube {
   transform: rotateX(90deg);
 }
+
+.preview-box {
+  width: 160px;
+  height: 90px;
+  margin: 5px;
+}
+.preview-box img {
+  position: relative;
+  height: 100%;
+}
+a {
+   outline: none;
+  }

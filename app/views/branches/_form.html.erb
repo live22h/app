@@ -1,12 +1,12 @@
 <div class="callout info">
-  <%= simple_form_for(@branch) do |f| %>
+  <%= simple_form_for(@branch, html: {multipart: true})  do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs callout">
     <div class="grid-x grid-margin-x">
       <div class="cell small-12 floated-label-wrapper">
-        <%= f.input :name, label: 'Краткое наименование (внутренне обозначение)', as: :string, :placeholder => "Краткое наименование (внутренне обозначение)" %>
+        <%= f.input :name, label: 'Краткое наименование (внутреннее обозначение)', as: :string, :placeholder => "Краткое наименование (внутренне обозначение)" %>
       </div>
       <div class="cell small-12 floated-label-wrapper">
         <%= f.input :organization, label: 'Юридическое лицо', as: :string, :placeholder => "Юридическое лицо" %>
@@ -44,18 +44,37 @@
         <%= f.input :director, label: 'Руководитель', :placeholder => 'Руководитель' %>
       </div>
       <div class="cell-small-6">
-        <%= f.file_field :background, label: 'Фото города', :placeholder => 'Фото города' %>
+        <label for="branch_background" class="button">Загрузить фото города</label>
+        <%= f.file_field :background, input_html: {class: 'show-for-sr' }  %>
+      </div>
+      <div class="cell small-12">
+        <div class="preview-box"><img id = 'preview' alt = 'Нет изображения' src="<%= @branch.background_url if @branch.background?%>") %></div>
       </div>
       <div class="cell small-12 floated-label-wrapper">
         <%= f.input :description, label: 'Текст с описанием филиала (будет отображен на странице для пользователей)', :placeholder => 'Текст с описанием филиала (будет отображен на странице для пользователей)' %>
       </div>
     </div>
-
     <div class="form-actions">
       <%= f.button :submit, 'OK' %>
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#preview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#branch_background").change(function(){
+  readURL(this);
+});
+</script>
+
 <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.10.1/dist/css/suggestions.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/suggestions-jquery@18.10.1/dist/js/jquery.suggestions.min.js"></script>
 <script>
