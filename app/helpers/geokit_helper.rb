@@ -1,8 +1,7 @@
 module GeokitHelper
   require 'geokit'
   def near_branch
-    #loc =  Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
-    loc =  Geokit::Geocoders::MultiGeocoder.geocode('188.162.166.12')
+    loc =  Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
 
     storages = Storage.all
     if (storages.count > 0)
